@@ -1,9 +1,8 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask.ext.login import UserMixin
-
+from flask import g, redirect, flash
+from flask.ext.login import UserMixin, current_user
 from datetime import datetime
-
-from mysite import db
+from mysite import app, db, login_manager
 from mysite.models import SerializableModel
 
 
@@ -16,9 +15,6 @@ class User(db.Model, SerializableModel, UserMixin):
     reg_time = db.Column(db.DATETIME, default=datetime.utcnow)
 
     def __init__(self, netid, password, name):
-        assert 5 <= len(netid) < 10
-        assert 0 < len(name) <= 50
-
         self.netid = netid
         self.set_password(password)
         self.name = name
@@ -46,5 +42,30 @@ class User(db.Model, SerializableModel, UserMixin):
         return unicode(self.netid)
 
     def __unicode__(self):
-        return self.username
+        return self.netid
 
+    @classmethod
+    def get_user(cls, netid):
+        return db.session.query(User).get(netid)
+
+    @classmethod
+    def add_user(cls, netid, password, name):
+        user = User(netid, password, name)
+        db.session.add(user)
+        db.session.commit()
+
+
+@login_manager.user_loader
+def load_user(netid):
+    return User.get_user(netid)
+
+
+@app.before_request
+def before_request():
+    g.user = current_user
+
+
+@login_manager.unauthorized_handler
+def unauthorized_callback():
+    flash("Please sign in first.")
+    return redirect('/signin')

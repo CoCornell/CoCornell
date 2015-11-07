@@ -3,10 +3,11 @@ USE cocornell;
 
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `netid` varchar(10) PRIMARY KEY,
+  `netid` varchar(10) NOT NULL,
   `name` varchar(50) NOT NULL,
   `password` varchar (250) NOT NULL,
-  `reg_time` datetime NOT NULL DEFAULT NOW()
+  `reg_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`netid`)
 ) DEFAULT CHARSET=utf8;
 
 
