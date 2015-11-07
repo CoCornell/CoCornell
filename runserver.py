@@ -1,6 +1,5 @@
 from mysite import app
-
-from mysite.views import index
+from mysite.views import index, signin, signup
 
 
 if __name__ == '__main__':

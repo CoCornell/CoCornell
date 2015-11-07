@@ -5,6 +5,7 @@ USE cocornell;
 CREATE TABLE IF NOT EXISTS `user` (
   `netid` varchar(10) PRIMARY KEY,
   `name` varchar(50) NOT NULL,
+  `password` varchar (250) NOT NULL,
   `reg_time` datetime NOT NULL DEFAULT NOW()
 ) DEFAULT CHARSET=utf8;
 
