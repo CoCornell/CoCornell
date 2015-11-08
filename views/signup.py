@@ -18,7 +18,7 @@ def signup():
 
     if User.get_user(netid):
         flash(u'NetID already exists!')
-        return redirect(url_for('index'))
+        return redirect(url_for('signin'))
 
     User.add_user(netid, password, name)
     flash('Sign up successfully.')

@@ -1,6 +1,6 @@
 from mysite import app
-from mysite.views import index, signin, signup, board
+from mysite.views import index, signin, signup, signout, board
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', threaded=True)
