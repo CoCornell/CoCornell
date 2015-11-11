@@ -24,7 +24,7 @@ def signin():
 
     if not registered_user.check_password(password):
         flash('Wrong password')
-        return redirect(url_for('signgin'))
+        return redirect(url_for('signin'))
 
     login_user(registered_user, remember_me)
     flash('Login successfully')

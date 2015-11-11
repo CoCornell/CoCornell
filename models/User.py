@@ -1,7 +1,9 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import g, redirect, flash
 from flask.ext.login import UserMixin, current_user
+
 from datetime import datetime
+
 from mysite import app, db, login_manager
 from mysite.models import SerializableModel
 

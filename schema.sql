@@ -35,8 +35,7 @@ CREATE TABLE IF NOT EXISTS `card` (
 
 
 CREATE TABLE IF NOT EXISTS `access` (
-  `id` int(8) AUTO_INCREMENT,
   `board_id` int(4) NOT NULL,
   `netid` VARCHAR (10) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`board_id`, `netid`)
 ) DEFAULT CHARSET=utf8;

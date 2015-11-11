@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div>
+    {% for list in lists %}
+    <p>This is list {{ list.id}}: {{ list.name }}.</p>
+    <ul>
+        {% for card in list.get_cards_by_list_id(list.id) %}
+            <li>{{ card.content }}</li>
+        {% endfor%}
+    </ul>
+    <hr>
+    {% endfor %}
+</div>
+
+<form action="/list" method="post">
+    <input type="text" name="name" required>
+    <input type="submit" value="Add List">
+</form>
+
+{% endblock %}

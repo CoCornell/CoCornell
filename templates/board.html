@@ -1,5 +1,16 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <p>This is board.</p>
+<div>
+    {% for board_id in board_ids %}
+    <p>This is <a href="/board/{{ board_id }}">board {{ board_id }}</a>.</p>
+    {% endfor %}
+</div>
+
+
+<form action="/board" method="post">
+    <input type="text" name="name" required>
+    <input type="submit" value="Add">
+</form>
+
 {% endblock %}
