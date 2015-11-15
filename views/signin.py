@@ -1,12 +1,16 @@
-from flask import request, render_template, flash, redirect, url_for
+from flask import request, render_template, flash, redirect, url_for, g
 from flask.ext.login import login_user
 
 from mysite import app
 from mysite.models.user import User
 
 
-@app.route('/signin', methods=['GET', 'POST'])
+@app.route('/signin/', methods=['GET', 'POST'])
 def signin():
+    if g.user.is_authenticated:
+        flash('Sign out first before you sign in again.')
+        return redirect(url_for('index'))
+
     if request.method == 'GET':
         return render_template("signin.html")
 
@@ -28,4 +32,4 @@ def signin():
 
     login_user(registered_user, remember_me)
     flash('Login successfully')
-    return redirect(url_for('index'))
+    return redirect(url_for('board'))

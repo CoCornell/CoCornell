@@ -5,12 +5,13 @@ from mysite import app
 from mysite.models.board import Board
 
 
-@app.route('/board', methods=['GET', 'POST'])
+@app.route('/board/', methods=['GET', 'POST'])
 @login_required
 def board():
     if request.method == 'GET':
         board_ids = Board.get_board_ids_by_netid(g.user.netid)
-        return render_template("board.html", board_ids=board_ids)
+        boards = map(Board.get_board_by_id, board_ids)
+        return render_template("board.html", boards=boards)
     else:
         # request.method == 'POST'
         name = request.form.get('name')
@@ -21,7 +22,7 @@ def board():
         return redirect(url_for('board'))
 
 
-@app.route("/board/<int:board_id>", methods=['GET'])
+@app.route("/board/<int:board_id>/", methods=['GET'])
 @login_required
 def board_page(board_id):
     """

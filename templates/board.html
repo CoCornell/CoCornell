@@ -1,9 +1,18 @@
 {% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/board.css') }}">
+
+<script src="{{ url_for('static', filename='js/board.js') }}"></script>
+{% endblock %}
 
 {% block body %}
-<div>
-    {% for board_id in board_ids %}
-    <p>This is <a href="/board/{{ board_id }}">board {{ board_id }}</a>.</p>
+<div class="row">
+    {% for board in boards %}
+    <div class="boards col-md-4 col-xs-18">
+        <div class="board alert alert-success" id="board{{board.id}}" role="alert">
+            <p>{{ board.name }}</p>
+        </div>
+    </div>
     {% endfor %}
 </div>
 

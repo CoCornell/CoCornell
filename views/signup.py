@@ -4,7 +4,7 @@ from mysite import app
 from mysite.models.user import User
 
 
-@app.route("/signup", methods=['GET', 'POST'])
+@app.route("/signup/", methods=['GET', 'POST'])
 def signup():
     if request.method == 'GET':
         return render_template("signup.html")

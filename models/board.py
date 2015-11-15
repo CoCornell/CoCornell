@@ -20,6 +20,13 @@ class Board(db.Model, SerializableModel):
         return '<Board [%d], %s>' % (self.id, self.name)
 
     @classmethod
+    def get_board_by_id(cls, id):
+        """
+        Returns the board specified by id.
+        """
+        return Board.query.filter_by(id=id)[0]
+
+    @classmethod
     def get_board_ids_by_netid(cls, netid):
         """
         Returns id of boards accessible to the user specified by the netid.
