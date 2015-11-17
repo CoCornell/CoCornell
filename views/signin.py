@@ -8,8 +8,7 @@ from mysite.models.user import User
 @app.route('/signin/', methods=['GET', 'POST'])
 def signin():
     if g.user.is_authenticated:
-        flash('Sign out first before you sign in again.')
-        return redirect(url_for('index'))
+        return redirect(url_for('board'))
 
     if request.method == 'GET':
         return render_template("signin.html")

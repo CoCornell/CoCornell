@@ -1,5 +1,52 @@
-{% extends "layout.html" %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta charset="UTF-8">
 
-{% block body %}
-    <p>This is index.</p>
-{% endblock %}
+        <title>Co-Cornell</title>
+
+        <link href="http://fonts.googleapis.com/css?family=Kotta+One|Cantarell:400,700" rel="stylesheet" type="text/css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+        <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    </head>
+    <body>
+        <header class="container">
+            <section class="content">
+                <h1>Co-Cornell, organize anything with anyone</h1>
+                <p class="sub-title"><strong>Achieve goals, manage projects, get things done.</strong></p>
+                <p><a class="button" id="load-more-content" href="#top">Learn More</a></p>
+                <p><a href="/signup">Sign Up</a> | <a href="/signin">Sign In</a></p>
+
+                <div id="more-content">
+                    <blockquote>
+                        Co-Cornell is a team/project management system, which aims at helping team members keep track of
+                        the project. It can facilitate collaborations, handle accessibilities of different parts of the
+                        project, make notifications and announcements more visible, and thus, help members organize the
+                        project visually and scientifically.
+                    </blockquote>
+                    <blockquote>
+                        In this application, a project will be abstracted as a board, and users can invite and add other
+                        members to this board, say, project. As the project can be separated into several parts/tasks,
+                        the board will be separated into corresponding lists. Each list may only be accessed by certain
+                        members, or by the whole team, which could be configured by the task manager. Team members who
+                        have access to the list can add card to the list. Cards can be all kinds of announcements that
+                        post to members, such as to-do list, known bugs, issue tracking, wiki, etc.
+                    </blockquote>
+                    <blockquote>
+                        Team members can also upload pictures. Images can be processed by filters designed in the system.
+                        The filters associated with image processing, machine learning and pattern recognition will be
+                        implemented to improve inferior-quality images to make them easier to recognize. Also, OCR
+                        (Optical Character Recognition) will be applied to convert images of typed, or printed text into
+                        machine-encoded text. Compared with images, text can be edited more conveniently and easier to
+                        read when displayed on devices.
+                    </blockquote>
+                </div>
+            </section>
+        </header>
+    </body>
+</html>
