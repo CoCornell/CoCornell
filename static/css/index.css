@@ -1,37 +1,16 @@
-/* Responsive Full Background Image Using CSS
- * Tutorial URL: http://sixrevisions.com/css/responsive-background-image/
-*/
 body {
-  /* Location of the image */
   background-image: url(../images/background-photo.jpg);
-  
-  /* Image is centered vertically and horizontally at all times */
   background-position: center center;
-  
-  /* Image doesn't repeat */
   background-repeat: no-repeat;
-  
-  /* Makes the image fixed in the viewport so that it doesn't move when 
-     the content height is greater than the image height */
   background-attachment: fixed;
-  
-  /* This is what makes the background image rescale based on its container's size */
   background-size: cover;
-  
-  /* Pick a solid background color that will be displayed while the background image is loading */
   background-color:#464646;
-  
-  /* SHORTHAND CSS NOTATION
-   * background: url(background-photo.jpg) center center cover no-repeat fixed;
-   */
 }
-
 
 html, body, .container {
   height: 100%;
 }
 
-/* Reset */
 html, body, h1, p, a, div, section {
   margin: 0;
   padding: 0;
@@ -39,7 +18,6 @@ html, body, h1, p, a, div, section {
   font: inherit;
 }
 
-/* Basic */
 body {
   font: 18px/23px "Cantarell", sans-serif;
   color: #ffffff;
@@ -214,8 +192,6 @@ blockquote cite {
 /* For mobile devices */
 @media only screen and (max-width: 767px) {
   body {
-    /* The file size of this background image is 93% smaller
-     * to improve page load speed on mobile internet connections */
     background-image: url(../images/background-photo-mobile-devices.jpg);
   }
 }

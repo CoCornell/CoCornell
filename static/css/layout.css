@@ -6,6 +6,16 @@ input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s; }
 
 body {
-  margin: 0; }
+  margin: 0 auto; }
+
+html, body {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit; }
 
 /*# sourceMappingURL=layout.css.map */

@@ -1,7 +1,14 @@
 div.boards div.board {
   width: 80%;
-  height: 200px;
-  margin: auto;
-  margin-bottom: 20px; }
+  height: 90px;
+  margin: auto auto 20px;
+  background-color: #0067a3;
+  color: #FFF;
+  font-weight: 700;
+  border-radius: 3px;
+  font-size: 1pc; }
+div.boards div.board p {
+  padding-left: 15px;
+  padding-top: 5px; }
 
 /*# sourceMappingURL=board.css.map */
