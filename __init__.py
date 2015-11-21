@@ -17,3 +17,6 @@ db = SQLAlchemy(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+from mysite.api import api
+app.register_blueprint(api, url_prefix="/api")

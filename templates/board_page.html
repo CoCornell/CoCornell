@@ -2,7 +2,8 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/board_page.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/dragula.min.css') }}">
+<script src="https://fb.me/react-0.14.3.min.js"></script>
+<script src="https://fb.me/JSXTransformer-0.14.3.js"></script>
 {% endblock %}
 
 
@@ -24,9 +25,4 @@
     <input type="submit" value="Add List">
 </form>
 
-{% endblock %}
-
-{% block js %}
-<script src="{{ url_for('static', filename='js/dragula.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/example.min.js') }}"></script>
 {% endblock %}

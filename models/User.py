@@ -1,4 +1,5 @@
 from werkzeug.security import generate_password_hash, check_password_hash
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, SignatureExpired, BadSignature
 from flask import g, redirect, flash
 from flask.ext.login import UserMixin, current_user
 
@@ -56,6 +57,22 @@ class User(db.Model, SerializableModel, UserMixin):
         db.session.add(user)
         db.session.commit()
 
+    def generate_auth_token(self, expiration=600):
+        s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
+        return s.dumps({ 'netid': self.netid })
+
+    @staticmethod
+    def verify_auth_token(token):
+        s = Serializer(app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except SignatureExpired:
+            return None  # valid token, but expired
+        except BadSignature:
+            return None  # invalid token
+        user = User.query.get(data['netid'])
+        return user
+
 
 @login_manager.user_loader
 def load_user(netid):
@@ -70,4 +87,4 @@ def before_request():
 @login_manager.unauthorized_handler
 def unauthorized_callback():
     flash("Please sign in first.")
-    return redirect('/signin')
+    return redirect('/signin/')
