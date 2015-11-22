@@ -1,15 +1,18 @@
 from flask import jsonify
+from mysite.api.const import Error
 
 
-def error(code, message=""):
-    return jsonify({
+def error(code, status_code=None):
+    ret = jsonify({
         "status": "error",
         "code": code,
-        "message": message
+        "message": Error.error_message(code)
     })
+    if status_code:
+        ret.status_code = status_code
+    return ret
 
-def ok(message=""):
-    return jsonify({
-        "status": "OK",
-        "message": message
-    })
+
+def ok(data):
+    data['status'] = 'OK'
+    return jsonify(data)
