@@ -1,6 +1,7 @@
 appnope==0.1.0
 decorator==4.0.4
 Flask==0.10.1
+Flask-HTTPAuth==2.7.0
 Flask-Login==0.3.2
 Flask-SQLAlchemy==2.1
 gnureadline==6.3.3
@@ -14,6 +15,7 @@ path.py==8.1.2
 pexpect==4.0.1
 pickleshare==0.5
 ptyprocess==0.5
+requests==2.8.1
 simplegeneric==0.8.1
 SQLAlchemy==1.0.9
 traitlets==4.0.0

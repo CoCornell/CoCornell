@@ -34,6 +34,13 @@ class Board(db.Model, SerializableModel):
         return map(lambda t: int(t[0]), Access.query.filter_by(netid=netid).with_entities(Access.board_id))
 
     @classmethod
+    def get_board_count_by_netid(cls, netid):
+        """
+        Returns number of boards accessible to the user specified by the netid.
+        """
+        return Access.query.filter_by(netid=netid).count()
+
+    @classmethod
     def has_access_to(cls, netid, board_id):
         """
         Returns True if the user specified by netid has access to the board

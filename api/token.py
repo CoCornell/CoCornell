@@ -7,7 +7,7 @@ from mysite.api import api
 auth = HTTPBasicAuth()
 
 
-@api.route('/token/')
+@api.route('/token/', methods=['GET'])
 @auth.login_required
 def get_auth_token():
     token = g.user.generate_auth_token()
