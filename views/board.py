@@ -3,6 +3,7 @@ from flask.ext.login import login_required
 
 from mysite import app
 from mysite.models.board import Board
+from mysite.models.list import List
 
 
 @app.route('/board/', methods=['GET', 'POST'])
@@ -30,5 +31,5 @@ def board_page(board_id):
     """
     if not Board.has_access_to(g.user.netid, board_id):
         return render_template("no_access.html")
-    lists = Board.get_lists_by_board_id(board_id)
+    lists = List.get_lists_by_board_id(board_id)
     return render_template("board_page.html", lists=lists)

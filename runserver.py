@@ -1,5 +1,5 @@
 from mysite import app
-from mysite.views import index, signin, signup, signout, board, list
+from mysite.views import index, signin, signup, signout, board, list, card
 
 
 if __name__ == '__main__':

@@ -16,3 +16,12 @@ class Card(db.Model, SerializableModel):
 
     def __repr__(self):
         return '<Card [%d]>' % self.id
+
+    @classmethod
+    def add_card(cls, list_id, content):
+        """
+        Adds a list to the board.
+        """
+        new_card = Card(list_id, content)
+        db.session.add(new_card)
+        db.session.commit()

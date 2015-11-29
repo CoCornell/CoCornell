@@ -8,19 +8,23 @@
 
 
 {% block body %}
-<div>
-    {% for list in lists %}
+{% for list in lists %}
+<div class="list">
     <p>This is list {{ list.id}}: {{ list.name }}.</p>
     <ul>
         {% for card in list.get_cards_by_list_id(list.id) %}
             <li>{{ card.content }}</li>
         {% endfor%}
-    </ul>
-    <hr>
-    {% endfor %}
-</div>
 
-<form action="/list/" method="post">
+        <form action="/card/{{list.id}}/" method="post" id="add_card">
+            <input type="text" name="content" id="content">
+            <input type="submit" value="Add card">
+        </form>
+    </ul>
+</div>
+{% endfor %}
+
+<form action="/list/" method="post" id="add_list">
     <input type="text" name="name" required>
     <input type="submit" value="Add List">
 </form>

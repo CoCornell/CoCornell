@@ -3,7 +3,6 @@ from flask import g
 from mysite import db
 from mysite.models import SerializableModel
 from mysite.models.access import Access
-from mysite.models.list import List
 
 
 class Board(db.Model, SerializableModel):
@@ -24,7 +23,10 @@ class Board(db.Model, SerializableModel):
         """
         Returns the board specified by id.
         """
-        return Board.query.filter_by(id=id)[0]
+        try:
+            return Board.query.filter_by(id=id)[0]
+        except IndexError:
+            return None
 
     @classmethod
     def get_board_ids_by_netid(cls, netid):
@@ -47,10 +49,6 @@ class Board(db.Model, SerializableModel):
         specified by board_id, else returns False.
         """
         return len(list(Access.query.filter_by(netid=netid, board_id=board_id))) == 1
-
-    @classmethod
-    def get_lists_by_board_id(cls, board_id):
-        return list(List.query.filter_by(board_id=board_id))
 
     @classmethod
     def add_board(cls, name):

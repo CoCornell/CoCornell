@@ -1,5 +1,6 @@
 from mysite import db
 from mysite.models import SerializableModel
+from mysite.models.board import Board
 from mysite.models.card import Card
 
 
@@ -19,7 +20,25 @@ class List(db.Model, SerializableModel):
         return '<List [%d], %d, %s>' % (self.id, self.board_id, self.name)
 
     @classmethod
+    def get_list_by_id(cls, list_id):
+        try:
+            return List.query.filter_by(id=list_id)[0]
+        except IndexError:
+            return None
+
+    @classmethod
+    def has_access_to(cls, netid, list_id):
+        """
+        Returns if user has access to the list.
+        """
+        list = List.get_list_by_id(list_id)
+        return Board.has_access_to(netid, list.board_id) if list else False
+
+    @classmethod
     def get_cards_by_list_id(cls, list_id):
+        """
+        Returns all cards belong to the list.
+        """
         return list(Card.query.filter_by(list_id=list_id))
 
     @classmethod
@@ -30,3 +49,7 @@ class List(db.Model, SerializableModel):
         new_list = List(board_id, name)
         db.session.add(new_list)
         db.session.commit()
+
+    @classmethod
+    def get_lists_by_board_id(cls, board_id):
+        return list(List.query.filter_by(board_id=board_id))
