@@ -1,13 +1,56 @@
-div.list {
-  float: left;
-  width: 250px;
-  min-height: 150px;
-  max-height: 300px;
-  background-color: #86989B;
-  margin: 1em;
-}
+div.main_board {
+  overflow: -moz-scrollbars-horizontal;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 98%;
+  height: 85vh;
+  margin: auto;
+  //box-shadow:6px 6px 6px rgba(20%,20%,40%,0.5),inset 1px 1px 4px 2px rgba(20%,20%,40%,0.5);
 
-form#add_list {
-  clear: left;
-  margin: 1em;
+  div.list {
+    display: inline-block;
+    width: 250px;
+    height: 95%;
+    background-color: #e2e4e6;
+    margin-left: 1em;
+    border-radius: 3px;
+
+    div.head {
+      height: 50px;
+      padding-left: 10px;
+    }
+
+    div.main {
+      overflow: scroll;
+      overflow: -moz-scrollbars-vertical;
+      height: 78%;
+      padding-bottom: 8px;
+
+      div.card {
+        border-radius: 3px;
+        background: #FFFFFF;
+        width: 90%;
+        height: 45px;
+        margin: auto auto 8px;
+      }
+    }
+
+    div.add {
+      height: 20%;
+
+      form#add_card {
+        width: 90%;
+        margin: auto;
+
+        input.content {
+          width: 100%;
+        }
+        input.add {
+          display: none;
+        }
+      }
+    }
+  }
+
 }

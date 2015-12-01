@@ -15,7 +15,7 @@ def list():
     Checks whether the Board id from referer url is valid.
     Checks whether the login user has access to the board.
     """
-    board_id_temp = request.referrer.split('/')[-1]
+    board_id_temp = request.referrer.split('/')[-2]
     board_id = ""
     for c in board_id_temp:
         if c.isdigit():
@@ -24,7 +24,7 @@ def list():
             break
     if not board_id:
         flash("Invalid Board id.")
-        return redirect(url_for('board'))
+        return redirect(url_for('board/1/'))
 
     if not Board.has_access_to(g.user.netid, board_id):
         return render_template("no_access.html")

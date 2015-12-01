@@ -7,8 +7,21 @@ input:-webkit-autofill:active {
 
 body {
   margin: 0 auto; }
+  body div.container {
+    margin: 0;
+    width: 100%; }
+  body ::-webkit-scrollbar {
+    height: 20px;
+    width: 10px; }
+  body ::-webkit-scrollbar-thumb {
+    background-color: #d3d3d3;
+    -webkit-border-radius: 1ex;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75); }
+  body ::-webkit-scrollbar-corner {
+    background-color: #e2e4e6; }
 
 html, body {
+  height: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
