@@ -2,10 +2,8 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/board_page.css') }}">
-<script src="https://fb.me/react-0.14.3.min.js"></script>
-<script src="https://fb.me/JSXTransformer-0.14.3.js"></script>
+<script src="{{ url_for('static', filename='js/board_page.js') }}"></script>
 {% endblock %}
-
 
 {% block body %}
 <div class="main_board">
@@ -13,11 +11,13 @@
     {% for list in lists %}
     <div class="list">
         <div class="head">
-            <h4>{{ list.name }}</h4>
+            <h4>{{ list.name }}<span class="delete" id="list{{ list.id }}">X</span></h4>
         </div>
         <div class="main">
             {% for card in list.get_cards_by_list_id(list.id) %}
-                <div class="card">{{ card.content }}</div>
+                <div class="card">
+                    <p class="content">{{ card.content }}</p>
+                </div>
             {% endfor%}
         </div>
         <div class="add">
@@ -42,7 +42,6 @@
             </form>
         </div>
     </div>
-
 
 </div><!--div.main_board-->
 {% endblock %}

@@ -19,6 +19,18 @@ div.main_board {
     div.head {
       height: 50px;
       padding-left: 10px;
+
+      h4 {
+        span.delete {
+          float: right;
+          margin-right: 10px;
+          cursor: pointer;
+        }
+        span.delete:hover {
+          color: #0067a3;
+          font-weight: 800;
+        }
+      }
     }
 
     div.main {
@@ -33,6 +45,11 @@ div.main_board {
         width: 90%;
         height: 45px;
         margin: auto auto 8px;
+
+        p.content {
+          margin-left: 10px;
+          padding-top: 3px;
+        }
       }
     }
 

@@ -31,8 +31,8 @@ class List(db.Model, SerializableModel):
         """
         Returns if user has access to the list.
         """
-        list = List.get_list_by_id(list_id)
-        return Board.has_access_to(netid, list.board_id) if list else False
+        list_ = List.get_list_by_id(list_id)
+        return Board.has_access_to(netid, list_.board_id) if list_ else False
 
     @classmethod
     def get_cards_by_list_id(cls, list_id):
@@ -53,3 +53,8 @@ class List(db.Model, SerializableModel):
     @classmethod
     def get_lists_by_board_id(cls, board_id):
         return list(List.query.filter_by(board_id=board_id))
+
+    @classmethod
+    def delete_list_by_id(cls, list_id):
+        db.session.query(List).filter(List.id == list_id).delete()
+        db.session.commit()

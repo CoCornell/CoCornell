@@ -8,7 +8,7 @@ from mysite.models.board import Board
 
 @app.route("/list/", methods=['POST'])
 @login_required
-def list():
+def list_():
     """
     Adds a list to a board.
 
@@ -24,7 +24,7 @@ def list():
             break
     if not board_id:
         flash("Invalid Board id.")
-        return redirect(url_for('board/1/'))
+        return redirect(url_for('board'))
 
     if not Board.has_access_to(g.user.netid, board_id):
         return render_template("no_access.html")

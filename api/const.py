@@ -7,6 +7,12 @@ class Error(object):
     NETID_EXISTED = 5
     INVALID_PASSWORD = 6
 
+    # board
+    NO_ACCESS_TO_BOARD = 10
+
+    # list
+    NO_ACCESS_TO_LIST = 20
+
     @classmethod
     def error_message(cls, error_code):
         if error_code == cls.EMPTY_NETID:
@@ -17,3 +23,7 @@ class Error(object):
             return 'NetID not exists'
         elif error_code == cls.INVALID_PASSWORD:
             return 'Invalid password'
+        elif error_code == cls.NO_ACCESS_TO_BOARD:
+            return 'No access to board'
+        elif error_code == cls.NO_ACCESS_TO_LIST:
+            return 'No access to list'

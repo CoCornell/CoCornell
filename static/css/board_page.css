@@ -16,6 +16,13 @@ div.main_board {
     div.main_board div.list div.head {
       height: 50px;
       padding-left: 10px; }
+      div.main_board div.list div.head h4 span.delete {
+        float: right;
+        margin-right: 10px;
+        cursor: pointer; }
+      div.main_board div.list div.head h4 span.delete:hover {
+        color: #0067a3;
+        font-weight: 800; }
     div.main_board div.list div.main {
       overflow: scroll;
       overflow: -moz-scrollbars-vertical;
@@ -27,6 +34,9 @@ div.main_board {
         width: 90%;
         height: 45px;
         margin: auto auto 8px; }
+        div.main_board div.list div.main div.card p.content {
+          margin-left: 10px;
+          padding-top: 3px; }
     div.main_board div.list div.add {
       height: 20%; }
       div.main_board div.list div.add form#add_card {
