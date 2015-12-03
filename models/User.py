@@ -64,7 +64,7 @@ class User(db.Model, SerializableModel, UserMixin):
         db.session.delete(user)
         db.session.commit()
 
-    def generate_auth_token(self, expiration=600):
+    def generate_auth_token(self, expiration=6000):
         s = Serializer(app.config['SECRET_KEY'], expires_in=expiration)
         return s.dumps({ 'netid': self.netid })
 

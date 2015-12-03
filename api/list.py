@@ -1,18 +1,37 @@
 from flask import request, g
-
+from mysite.models.board import Board
 from mysite.models.list import List
 from mysite.api import api
+from mysite.api.token import auth
 from mysite.api.const import Error
 from mysite.api.utils import ok, error
-from mysite.api.token import auth
+
+
+@api.route("/board/<int:board_id>/list/", methods=['GET'])
+@auth.login_required
+def list_(board_id):
+    """
+    Returns all the lists belongs to the board specified by board id.
+    """
+    if not Board.has_access_to(g.user.netid, board_id):
+        return error(Error.NO_ACCESS_TO_BOARD)
+
+    lists = List.get_lists_by_board_id(board_id)
+    return ok({"lists": map(lambda x: x.to_dict(), lists)})
 
 
 @api.route("/list/<int:list_id>/", methods=['GET', 'DELETE'])
 @auth.login_required
 def delete_list(list_id):
+    """
+    Returns or deletes the list specified by list id.
+    """
     if not List.has_access_to(g.user.netid, list_id):
         return error(Error.NO_ACCESS_TO_LIST)
 
     if request.method == 'DELETE':
         List.delete_list_by_id(list_id)
         return ok({"deleted": True})
+
+    if request.method == 'GET':
+        return ok({"list": List.get_list_by_id(list_id).to_dict()})

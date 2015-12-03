@@ -1,4 +1,4 @@
-from flask import g, request, flash, redirect, render_template, url_for
+from flask import g, request, flash, redirect, render_template, url_for, jsonify
 from flask.ext.login import login_required
 
 from mysite import app
@@ -35,3 +35,12 @@ def list_():
         return redirect('/board/' + board_id)
     List.add_list(board_id, name)
     return redirect('/board/' + board_id)
+
+
+@app.route("/list/<int:list_id>/", methods=['DELETE'])
+@login_required
+def delete_list(list_id):
+    if not List.has_access_to(g.user.netid, list_id):
+        return redirect(url_for('board'))
+    List.delete_list_by_id(list_id)
+    return jsonify({"deleted": True})

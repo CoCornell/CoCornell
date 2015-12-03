@@ -21,10 +21,7 @@ class List(db.Model, SerializableModel):
 
     @classmethod
     def get_list_by_id(cls, list_id):
-        try:
-            return List.query.filter_by(id=list_id)[0]
-        except IndexError:
-            return None
+        return List.query.filter_by(id=list_id).first()
 
     @classmethod
     def has_access_to(cls, netid, list_id):

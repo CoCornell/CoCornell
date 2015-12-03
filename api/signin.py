@@ -6,7 +6,7 @@ from mysite.api.const import Error
 from mysite.models.user import User
 
 
-@api.route("/signin/", methods=['GET', 'POST'])
+@api.route("/signin/", methods=['POST'])
 def signin():
     netid = request.form.get('netid', '').strip()
     password = request.form.get('password', '').strip()

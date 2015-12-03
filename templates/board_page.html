@@ -9,9 +9,9 @@
 <div class="main_board">
 
     {% for list in lists %}
-    <div class="list">
+    <div class="list" id="list{{ list.id }}">
         <div class="head">
-            <h4>{{ list.name }}<span class="delete" id="list{{ list.id }}">X</span></h4>
+            <h4>{{ list.name }}<span class="delete" id="delete_list{{ list.id }}">X</span></h4>
         </div>
         <div class="main">
             {% for card in list.get_cards_by_list_id(list.id) %}

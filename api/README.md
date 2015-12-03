@@ -1,5 +1,174 @@
-# `GET` `api/token/`
 
-# `GET` `api/board/`
+API Prefix: /api/
 
-# `GET` `api/board/count/`
+In following samples, the authentication will be omitted. But you need to make authentications if needed.
+
+status: ok / error
+
+error code
+
+
+# GET /token/  
+Returns a unique token for authorized user, which expires in 6000 seconds. You need to use this token for every subsequent requests to authenticate. Just specify authentication data like this: `-u <your_token>:unused`.
+
+
+### Requires Authentication
+Yes
+
+### Parameters
+None
+
+### Sample Request
+```
+curl -u hy456:123 -X GET http://localhost:5000/api/token/
+```
+
+### Sample Result
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsImV4cCI6MTQ0OTEyMDE5MSwiaWF0IjoxNDQ5MTE5NTkxfQ.eyJuZXRpZCI6Imh5NDU2In0.zQMTo0VfXuyjq8T2ut-pP_-vxuq-m1_e214Gkg2M6Vk"
+}
+```
+
+
+
+
+# POST /signup/
+Sign up a new user specified by netid, password and name. Returns user's info if sign up successfully.
+
+### Requires Authentication
+No
+
+### Parameters
+Parameter | Required / Optional    | Value
+----------|------------------------|---------
+`netid`   |  Required              | string
+`password`|  Required              | string
+`name`    |  Required              | string
+
+### Sample Request
+```
+curl -d "netid=abc123&name=Jack&password=123" -X POST http://localhost:5000/api/signup/
+```
+
+### Sample Result
+```json
+{
+  "status": "OK",
+  "user": {
+    "name": "Jack",
+    "netid": "abc123",
+    "reg_time": "2015-12-03 00:40:38"
+  }
+}
+```
+
+
+
+# GET /board/
+Returns all the boards the user has access to.
+
+### Requires Authentication
+Yes
+
+### Parameters
+None
+
+### Sample Request
+```
+curl http://localhost:5000/api/board/
+```
+
+### Sample Result
+```json
+{
+  "boards": [
+    {
+      "id": 1,
+      "name": "project1"
+    },
+    {
+      "id": 2,
+      "name": "project2"
+    }
+  ],
+  "status": "OK"
+}
+```
+
+
+
+# GET /board/count/
+Returns number of boards the user has access to.
+
+### Requires Authentication
+Yes
+
+### Parameters
+None
+
+### Sample Request
+```
+curl http://localhost:5000/api/board/count/
+```
+
+### Sample Result
+```json
+{
+  "count": 8,
+  "status": "OK"
+}
+```
+
+
+# GET /list/\<int:list_id\>/
+Returns the list specified by list id.
+
+### Requires Authentication
+Yes
+
+### Parameters
+None
+
+### Sample Request
+```
+curl http://localhost:5000/api/list/1/
+```
+
+
+### Sample Result
+```json
+{
+  "list": {
+    "board_id": 1,
+    "id": 1,
+    "name": "board1-list1"
+  },
+  "status": "OK"
+}
+
+```
+
+
+
+# DELETE /list/\<int:list_id\>/
+Delete the list specified by list id.
+
+### Requires Authentication
+Yes
+
+### Parameters
+None
+
+### Sample Request
+```
+curl -X DELETE http://localhost:5000/api/list/1/
+```
+
+### Sample Result
+```json
+{
+  "deleted": true,
+  "status": "OK"
+}
+```
