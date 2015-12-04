@@ -1,4 +1,4 @@
-from flask import g, request, flash, redirect, render_template, url_for
+from flask import g, request, flash, redirect, render_template, url_for, jsonify
 from flask.ext.login import login_required
 
 from mysite import app
@@ -6,12 +6,16 @@ from mysite.models.list import List
 from mysite.models.card import Card
 
 
-@app.route("/card/<int:list_id>/", methods=['POST'])
+@app.route("/card/", methods=['POST'])
 @login_required
-def add_card(list_id):
+def add_card():
     """
     Adds a card to a list.
     """
+    list_id = request.form.get("list_id")
+    if not list_id:
+        return redirect(url_for("board"))
+
     board_id = List.get_list_by_id(list_id).board_id
 
     if not List.has_access_to(g.user.netid, list_id):
@@ -23,3 +27,17 @@ def add_card(list_id):
     else:
         Card.add_card(list_id, content)
     return redirect('/board/' + str(board_id))
+
+
+@app.route("/card/<int:card_id>/", methods=['DELETE'])
+@login_required
+def delete_card(card_id):
+    """
+    Deletes a card.
+    """
+    print "here"
+    if not List.has_access_to_card(g.user.netid, card_id):
+        return redirect(url_for('board'))
+    print "here2"
+    Card.delete_card_by_id(card_id)
+    return jsonify({"deleted": True})

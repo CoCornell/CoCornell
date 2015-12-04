@@ -15,13 +15,15 @@
         </div>
         <div class="main">
             {% for card in list.get_cards_by_list_id(list.id) %}
-                <div class="card">
+                <div class="card" id="card{{ card.id }}">
+                    <p><span class="delete" id="delete_card{{ card.id }}">X</span></p>
                     <p class="content">{{ card.content }}</p>
                 </div>
             {% endfor%}
         </div>
         <div class="add">
-            <form action="/card/{{list.id}}/" method="post" id="add_card">
+            <form action="/card/" method="post" id="add_card">
+                <input class="add_card" type="text" name="list_id" value="{{ list.id }}">
                 <input class="content" type="text" name="content" id="content" placeholder="Append a card...">
                 <input class="add" type="submit" value="Add card">
             </form>

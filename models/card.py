@@ -18,10 +18,19 @@ class Card(db.Model, SerializableModel):
         return '<Card [%d]>' % self.id
 
     @classmethod
+    def get_card_by_id(cls, card_id):
+        return Card.query.filter_by(id=card_id).first()
+
+    @classmethod
     def add_card(cls, list_id, content):
         """
         Adds a list to the board.
         """
         new_card = Card(list_id, content)
         db.session.add(new_card)
+        db.session.commit()
+
+    @classmethod
+    def delete_card_by_id(cls, card_id):
+        db.session.query(Card).filter(Card.id == card_id).delete()
         db.session.commit()

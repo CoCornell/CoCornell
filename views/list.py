@@ -8,7 +8,7 @@ from mysite.models.board import Board
 
 @app.route("/list/", methods=['POST'])
 @login_required
-def list_():
+def add_list_to_board():
     """
     Adds a list to a board.
 
@@ -40,6 +40,9 @@ def list_():
 @app.route("/list/<int:list_id>/", methods=['DELETE'])
 @login_required
 def delete_list(list_id):
+    """
+    Deletes a list.
+    """
     if not List.has_access_to(g.user.netid, list_id):
         return redirect(url_for('board'))
     List.delete_list_by_id(list_id)

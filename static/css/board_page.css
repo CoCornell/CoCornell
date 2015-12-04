@@ -36,12 +36,21 @@ div.main_board {
         margin: auto auto 8px; }
         div.main_board div.list div.main div.card p.content {
           margin-left: 10px;
-          padding-top: 3px; }
+          padding-top: 3px;
+          width: 80%; }
+        div.main_board div.list div.main div.card p span.delete {
+          width: 10%;
+          display: inline-block;
+          float: right;
+          text-align: center;
+          cursor: pointer; }
     div.main_board div.list div.add {
       height: 20%; }
       div.main_board div.list div.add form#add_card {
         width: 90%;
         margin: auto; }
+        div.main_board div.list div.add form#add_card input.add_card {
+          display: none; }
         div.main_board div.list div.add form#add_card input.content {
           width: 100%; }
         div.main_board div.list div.add form#add_card input.add {

@@ -8,15 +8,15 @@
 {% block body %}
 <div class="row">
     {% for board in boards %}
-    <div class="boards col-md-4 col-xs-18">
-        <div class="board" id="board{{board.id}}" role="alert">
+    <div class="boards col-md-3 col-sm-6 col-xs-18">
+        <div class="board normal" id="board{{board.id}}" role="alert">
             <p>{{ board.name }}</p>
         </div>
     </div>
     {% endfor %}
 
-    <div class="boards col-md-4 col-xs-18">
-        <div class="board" data-toggle="modal" data-target="#myModal">
+    <div class="boards col-md-3 col-sm-6 col-xs-18">
+        <div class="board new_board" data-toggle="modal" data-target="#myModal">
             <p>Create new board</p>
         </div>
     </div>

@@ -32,6 +32,14 @@ class List(db.Model, SerializableModel):
         return Board.has_access_to(netid, list_.board_id) if list_ else False
 
     @classmethod
+    def has_access_to_card(cls, netid, card_id):
+        """
+        Returns if user has access to the card.
+        """
+        card = Card.get_card_by_id(card_id)
+        return List.has_access_to(netid, card.list_id)
+
+    @classmethod
     def get_cards_by_list_id(cls, list_id):
         """
         Returns all cards belong to the list.

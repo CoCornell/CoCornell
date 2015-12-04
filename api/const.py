@@ -13,8 +13,10 @@ class Error(object):
     # list
     NO_ACCESS_TO_LIST = 20
 
+    MISSING_PARAMETER = 30
+
     @classmethod
-    def error_message(cls, error_code):
+    def error_message(cls, error_code, *args):
         if error_code == cls.EMPTY_NETID:
             return 'NetID is empty'
         elif error_code == cls.EMPTY_PASSWORD:
@@ -27,3 +29,5 @@ class Error(object):
             return 'No access to board'
         elif error_code == cls.NO_ACCESS_TO_LIST:
             return 'No access to list'
+        elif error_code == cls.MISSING_PARAMETER:
+            return 'Missing parameter: ' + args[0]

@@ -3,11 +3,26 @@ div.boards {
     width: 80%;
     height: 90px;
     margin: auto auto 20px;
-    background-color: #0067a3;
-    color: #FFF;
     font-weight: 700;
     border-radius: 3px;
     font-size: 1pc;
+    cursor: pointer;
+    max-width: 300px;
+  }
+
+  div.normal {
+    background-color: #0067a3;
+    color: #FFF;
+  }
+
+  div.new_board {
+    background-color: #e2e4e6;
+    color: #8c8c8c;
+    padding-top: 25px;
+    p {
+      text-align: center;
+      height: 20px;
+    }
   }
 
   div.board p {
