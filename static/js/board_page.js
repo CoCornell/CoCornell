@@ -34,4 +34,6 @@ $(document).ready(function(){
                 fail: function() {}
             });
         });
+
+    //$("div.list:last-of-type").height($("div.list:first-child").height());
 });

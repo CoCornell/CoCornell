@@ -12,6 +12,7 @@ div.main_board {
     display: inline-block;
     width: 250px;
     height: 95%;
+    min-height: 400px;
     background-color: #e2e4e6;
     margin-left: 1em;
     border-radius: 3px;
@@ -21,6 +22,7 @@ div.main_board {
       padding-left: 10px;
 
       h4 {
+
         span.delete {
           float: right;
           margin-right: 10px;
@@ -47,6 +49,8 @@ div.main_board {
         margin: auto auto 8px;
 
         p.content {
+          overflow-y: scroll;
+          overflow-x: auto;
           margin-left: 10px;
           padding-top: 3px;
           width: 80%;
@@ -65,14 +69,13 @@ div.main_board {
     div.add {
       height: 20%;
 
-      form#add_card {
+      form.add_card {
         width: 90%;
         margin: auto;
 
         input.add_card {
           display: none;
         }
-
         input.content {
           width: 100%;
         }
@@ -83,4 +86,13 @@ div.main_board {
     }
   }
 
+  div.list:last-of-type {
+    background-color: inherit;
+    padding-top: 0;
+    margin-top: 0;
+    form.add_list {
+      margin-top: 0;
+      padding-top: 0;
+    }
+  }
 }

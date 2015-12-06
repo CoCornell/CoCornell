@@ -15,3 +15,14 @@ class Access(db.Model, SerializableModel):
 
     def __repr__(self):
         return '<Access board %s, netid %s>' % (self.board_id, self.netid)
+
+    @classmethod
+    def add_access(cls, board_id, netid):
+        try:
+            access = Access(board_id, netid)
+            db.session.add(access)
+            db.session.commit()
+            return True
+        except:
+            db.session.rollback()
+            return False

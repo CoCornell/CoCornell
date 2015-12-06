@@ -23,10 +23,7 @@ class Board(db.Model, SerializableModel):
         """
         Returns the board specified by id.
         """
-        try:
-            return Board.query.filter_by(id=id)[0]
-        except IndexError:
-            return None
+        return Board.query.filter_by(id=id).first()
 
     @classmethod
     def get_board_ids_by_netid(cls, netid):
@@ -63,7 +60,12 @@ class Board(db.Model, SerializableModel):
             access = Access(board.id, g.user.netid)
             db.session.add(access)
             db.session.commit()
-            return True
+            return board
         except:
             db.session.rollback()
-            return False
+            return None
+
+    @classmethod
+    def delete_board_by_id(cls, board_id):
+        db.session.query(Board).filter(Board.id == board_id).delete()
+        db.session.commit()

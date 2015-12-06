@@ -48,7 +48,16 @@ def add_list():
     Adds a list specified by list name and board id.
     Returns the created list id.
     """
-    list_name = request.form.get("list_name")
+    list_name = request.form.get("name")
     board_id = request.form.get("board_id")
-    if not list_name or not board_id:
-        return error()
+
+    if not list_name:
+        return error(Error.EMPTY_LIST_NAME, 400)
+    elif not board_id:
+        return error(Error.EMPTY_BOARD_ID, 400)
+
+    if not Board.has_access_to(g.user.netid, board_id):
+        return error(Error.NO_ACCESS_TO_BOARD, 400)
+
+    list_ = List.add_list(board_id, list_name)
+    return ok({"created": True, "list": list_.to_dict()})

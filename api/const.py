@@ -9,9 +9,12 @@ class Error(object):
 
     # board
     NO_ACCESS_TO_BOARD = 10
+    EMPTY_BOARD_ID = 11
+    EMPTY_BOARD_NAME = 12
 
     # list
     NO_ACCESS_TO_LIST = 20
+    EMPTY_LIST_NAME = 21
 
     MISSING_PARAMETER = 30
 
@@ -27,7 +30,13 @@ class Error(object):
             return 'Invalid password'
         elif error_code == cls.NO_ACCESS_TO_BOARD:
             return 'No access to board'
+        elif error_code == cls.NO_ACCESS_TO_BOARD:
+            return 'Board id is empty'
         elif error_code == cls.NO_ACCESS_TO_LIST:
             return 'No access to list'
+        elif error_code == cls.EMPTY_LIST_NAME:
+            return 'List name is empty'
         elif error_code == cls.MISSING_PARAMETER:
             return 'Missing parameter: ' + args[0]
+        elif error_code == cls.EMPTY_BOARD_NAME:
+            return 'Board name is empty'

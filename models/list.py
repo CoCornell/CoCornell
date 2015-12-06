@@ -13,7 +13,7 @@ class List(db.Model, SerializableModel):
     name = db.Column(db.String(50))
 
     def __init__(self, board_id, name):
-        self.board_id = int(board_id)
+        self.board_id = board_id
         self.name = name
 
     def __repr__(self):
@@ -49,11 +49,14 @@ class List(db.Model, SerializableModel):
     @classmethod
     def add_list(cls, board_id, name):
         """
-        Adds a list to the board.
+        Adds a list to the board, and returns the created list.
         """
+        if not Board.get_board_by_id(board_id):
+            return None
         new_list = List(board_id, name)
         db.session.add(new_list)
         db.session.commit()
+        return new_list
 
     @classmethod
     def get_lists_by_board_id(cls, board_id):

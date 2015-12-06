@@ -22,7 +22,7 @@
             {% endfor%}
         </div>
         <div class="add">
-            <form action="/card/" method="post" id="add_card">
+            <form action="/card/" method="post" class="add_card">
                 <input class="add_card" type="text" name="list_id" value="{{ list.id }}">
                 <input class="content" type="text" name="content" id="content" placeholder="Append a card...">
                 <input class="add" type="submit" value="Add card">
@@ -32,17 +32,10 @@
     {% endfor %}
 
     <div class="list">
-        <div class="head">
-            <h4></h4>
-        </div>
-        <div class="main">
-        </div>
-        <div class="add">
-            <form action="/list/" method="post" id="add_list">
-                <input type="text" name="name" required>
-                <input type="submit" value="Add list">
-            </form>
-        </div>
+        <form action="/list/" method="post" class="add_list">
+            <input type="text" name="name" required>
+            <input type="submit" value="Add list">
+        </form>
     </div>
 
 </div><!--div.main_board-->
