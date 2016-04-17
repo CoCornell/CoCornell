@@ -1,3 +1,6 @@
 .DS_Store
 *.pyc
 *.css.map
+static/uploads/*.jpg
+static/uploads/*.png
+

@@ -29,6 +29,10 @@ div.main_board {
       overflow: -moz-scrollbars-vertical;
       height: 78%;
       padding-bottom: 8px; }
+      div.main_board div.list div.main img.image {
+        width: 90%;
+        margin-left: 5%;
+        margin-bottom: 8px; }
       div.main_board div.list div.main div.card {
         border-radius: 3px;
         background: #FFFFFF;

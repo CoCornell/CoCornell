@@ -15,17 +15,28 @@
         </div>
         <div class="main">
             {% for card in list.get_cards_by_list_id(list.id) %}
-                <div class="card" id="card{{ card.id }}">
-                    <p><span class="delete" id="delete_card{{ card.id }}">X</span></p>
-                    <p class="content">{{ card.content }}</p>
-                </div>
+                {% if card.is_image %}
+                    <img class="image" src="{{ url_for('static', filename='uploads/') }}{{ card.content }}" alt="{{ card.content }}">
+                    <br>
+                {% else %}
+                    <div class="card" id="card{{ card.id }}">
+                        <p><span class="delete" id="delete_card{{ card.id }}">X</span></p>
+                        <p class="content">{{ card.content }}</p>
+                    </div>
+                {% endif %}
+
             {% endfor%}
         </div>
         <div class="add">
             <form action="/card/" method="post" class="add_card">
-                <input class="add_card" type="text" name="list_id" value="{{ list.id }}">
+                <input class="add_card" type="text" name="list_id" value="{{ list.id }}" hidden="hidden">
                 <input class="content" type="text" name="content" id="content" placeholder="Append a card...">
                 <input class="add" type="submit" value="Add card">
+            </form>
+            <form action="/upload/" method="post" enctype="multipart/form-data">
+                <input class="add_card" type="text" name="list_id" value="{{ list.id }}" hidden="hidden">
+                <input type="file" name="file">
+                <input type="submit" value="Upload">
             </form>
         </div>
     </div>

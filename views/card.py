@@ -35,9 +35,7 @@ def delete_card(card_id):
     """
     Deletes a card.
     """
-    print "here"
     if not List.has_access_to_card(g.user.netid, card_id):
         return redirect(url_for('board'))
-    print "here2"
     Card.delete_card_by_id(card_id)
     return jsonify({"deleted": True})
