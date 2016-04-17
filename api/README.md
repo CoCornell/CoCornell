@@ -122,7 +122,7 @@ curl http://localhost:5000/api/board/count/
 
 
 # GET /list/\<int:list_id\>/
-Returns the list specified by list id.
+Returns the list, including all the cards in it specified by list id.
 
 ### Requires Authentication
 Yes
@@ -141,12 +141,23 @@ curl http://localhost:5000/api/list/1/
 {
   "list": {
     "board_id": 1,
+    "cards": [
+      {
+        "content": "project2",
+        "id": 1,
+        "list_id": 1
+      },
+      {
+        "content": "project1b",
+        "id": 2,
+        "list_id": 1
+      }
+    ],
     "id": 1,
-    "name": "board1-list1"
+    "name": "5300"
   },
   "status": "OK"
 }
-
 ```
 
 
