@@ -143,18 +143,20 @@ curl http://localhost:5000/api/list/1/
     "board_id": 1,
     "cards": [
       {
-        "content": "project2",
-        "id": 1,
-        "list_id": 1
+        "content": "content",
+        "id": 22,
+        "is_image": false,
+        "list_id": 6
       },
       {
-        "content": "project1b",
-        "id": 2,
-        "list_id": 1
+        "content": "test.png",
+        "id": 31,
+        "is_image": true,
+        "list_id": 6
       }
     ],
-    "id": 1,
-    "name": "5300"
+    "id": 6,
+    "name": "new_list"
   },
   "status": "OK"
 }
@@ -248,7 +250,7 @@ curl -X DELETE http://localhost:5000/api/card/1/
 
 
 # POST /card/
-Add a card.
+Add a text card.
 
 ### Requires Authentication
 Yes
@@ -274,6 +276,38 @@ curl -X POST -d "list_id=6&content=content" http://localhost:5000/api/card/
     "is_image": false,
     "list_id": 6
   },
+  "status": "OK"
+}
+```
+
+
+# POST /upload/
+Add an image card.
+
+### Requires Authentication
+Yes
+
+### Parameters
+Parameter | Required / Optional    | Value
+----------|------------------------|---------
+`list_id` |  Required              | Integer
+`file`    |  Required              | File
+
+### Sample Request
+```
+curl -X POST http://localhost:5000/api/upload/ -d "list_id=6&file=@/Users/yhf/Desktop/test.png"
+```
+
+### Sample Result
+```json
+{
+  "card": {
+    "content": "test.png",
+    "id": 30,
+    "is_image": true,
+    "list_id": 6
+  },
+  "created": true,
   "status": "OK"
 }
 ```
