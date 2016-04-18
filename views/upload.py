@@ -3,12 +3,13 @@ import os
 
 from flask import request, redirect
 from flask.ext.login import login_required
+from werkzeug import secure_filename
 
 from mysite import app, ALLOWED_EXTENSIONS
+from mysite.models.list import List
 from mysite.models.card import Card
 from mysite.models.ocr import OCR
 from mysite.ocr.ocr import ocr
-from werkzeug import secure_filename
 
 
 def allowed_file(filename):
@@ -32,10 +33,10 @@ def upload_image():
     if f and allowed_file(f.filename):
         filename = secure_filename(f.filename)
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        card_id = Card.add_card(list_id, f.filename, True)
+        card = Card.add_card(list_id, f.filename, True)
 
         image_path = app.config['IMAGE_PATH'] + filename
-        thread = Thread(target=async_ocr, args=[app, image_path, card_id])
+        thread = Thread(target=async_ocr, args=[app, image_path, card.id])
         thread.start()
 
-        return redirect('/board/' + list_id)
+        return redirect('/board/' + str(List.query.filter_by(id=list_id).first().board_id))

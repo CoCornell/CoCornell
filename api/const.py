@@ -20,8 +20,10 @@ class Error(object):
     # card
     NO_ACCESS_TO_CARD = 26
     EMPTY_CARD_CONTENT = 27
+    EMPTY_IMAGE = 28
 
     MISSING_PARAMETER = 30
+
 
     @classmethod
     def error_message(cls, error_code, *args):
