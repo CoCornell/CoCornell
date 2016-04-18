@@ -64,8 +64,3 @@ class Board(db.Model, SerializableModel):
         except:
             db.session.rollback()
             return None
-
-    @classmethod
-    def delete_board_by_id(cls, board_id):
-        db.session.query(Board).filter(Board.id == board_id).delete()
-        db.session.commit()

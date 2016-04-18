@@ -26,14 +26,14 @@ class Card(db.Model, SerializableModel):
     @classmethod
     def add_card(cls, list_id, content, is_image=False):
         """
-        Adds a card to the list, and returns the card id.
+        Adds a card to the list, and returns the card.
         """
         new_card = Card(list_id, content, is_image)
         db.session.add(new_card)
         db.session.flush()
         db.session.refresh(new_card)  # to let the new_card has attribute `id`
         db.session.commit()
-        return new_card.id
+        return new_card
 
     @classmethod
     def delete_card_by_id(cls, card_id):

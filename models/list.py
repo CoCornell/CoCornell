@@ -65,4 +65,12 @@ class List(db.Model, SerializableModel):
     @classmethod
     def delete_list_by_id(cls, list_id):
         db.session.query(List).filter(List.id == list_id).delete()
+        db.session.query(Card).filter(Card.list_id == list_id).delete()
+        db.session.commit()
+
+    @classmethod
+    def delete_board_by_id(cls, board_id):
+        db.session.query(Board).filter(Board.id == board_id).delete()
+        for list_ in List.query.filter_by(board_id=board_id):
+            cls.delete_list_by_id(list_.id)
         db.session.commit()

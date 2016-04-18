@@ -15,6 +15,11 @@ class Error(object):
     # list
     NO_ACCESS_TO_LIST = 20
     EMPTY_LIST_NAME = 21
+    EMPTY_LIST_ID = 22
+
+    # card
+    NO_ACCESS_TO_CARD = 26
+    EMPTY_CARD_CONTENT = 27
 
     MISSING_PARAMETER = 30
 
@@ -40,3 +45,9 @@ class Error(object):
             return 'Missing parameter: ' + args[0]
         elif error_code == cls.EMPTY_BOARD_NAME:
             return 'Board name is empty'
+        elif error_code == cls.NO_ACCESS_TO_CARD:
+            return 'No access to card'
+        elif error_code == cls.EMPTY_CARD_CONTENT:
+            return 'Card content is empty'
+        elif error_code == cls.EMPTY_LIST_ID:
+            return 'List id is empty'

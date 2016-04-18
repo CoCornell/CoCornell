@@ -162,6 +162,8 @@ curl http://localhost:5000/api/list/1/
 
 
 
+
+
 # DELETE /list/\<int:list_id\>/
 Delete the list specified by list id.
 
@@ -180,6 +182,98 @@ curl -X DELETE http://localhost:5000/api/list/1/
 ```json
 {
   "deleted": true,
+  "status": "OK"
+}
+```
+
+
+
+# POST /list/
+Add a list.
+
+### Requires Authentication
+Yes
+
+### Parameters
+Parameter | Required / Optional    | Value
+----------|------------------------|---------
+`board_id`|  Required              | Integer
+`name`    |  Required              | string
+
+### Sample Request
+```
+curl -X POST -d "board_id=1&name=new_list" http://localhost:5000/api/list/
+```
+
+### Sample Result
+```json
+{
+  "created": true,
+  "list": {
+    "board_id": 1,
+    "id": 6,
+    "name": "new_list"
+  },
+  "status": "OK"
+}
+```
+
+
+
+
+# DELETE /card/\<int:card_id\>/
+Delete the card specified by card id.
+
+### Requires Authentication
+Yes
+
+### Parameters
+None
+
+### Sample Request
+```
+curl -X DELETE http://localhost:5000/api/card/1/
+```
+
+### Sample Result
+```json
+{
+  "deleted": true,
+  "status": "OK"
+}
+```
+
+
+
+
+
+# POST /card/
+Add a card.
+
+### Requires Authentication
+Yes
+
+### Parameters
+Parameter | Required / Optional    | Value
+----------|------------------------|---------
+`list_id` |  Required              | Integer
+`content` |  Required              | string
+
+### Sample Request
+```
+curl -X POST -d "list_id=6&content=content" http://localhost:5000/api/card/
+```
+
+### Sample Result
+```json
+{
+  "created": true,
+  "list": {
+    "content": "content",
+    "id": 22,
+    "is_image": false,
+    "list_id": 6
+  },
   "status": "OK"
 }
 ```
