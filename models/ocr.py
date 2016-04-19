@@ -12,7 +12,7 @@ class OCR(db.Model, SerializableModel):
 
     def __init__(self, card_id, text):
         self.card_id = card_id
-        self.text = text
+        self.text = text.decode("utf-8").encode("utf-8")
 
     def __repr__(self):
         return '<OCR [%d], %s>' % (self.card_id, self.text)
@@ -26,3 +26,7 @@ class OCR(db.Model, SerializableModel):
         db.session.add(ocr_relation)
         db.session.commit()
         return ocr_relation
+
+    @classmethod
+    def get_ocr_by_card_id(cls, card_id):
+        return OCR.query.filter_by(card_id=card_id).first()

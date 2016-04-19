@@ -21,6 +21,7 @@ class Error(object):
     NO_ACCESS_TO_CARD = 26
     EMPTY_CARD_CONTENT = 27
     EMPTY_IMAGE = 28
+    NO_OCR_TEXT = 29
 
     MISSING_PARAMETER = 30
 
@@ -53,3 +54,5 @@ class Error(object):
             return 'Card content is empty'
         elif error_code == cls.EMPTY_LIST_ID:
             return 'List id is empty'
+        elif error_code == cls.NO_OCR_TEXT:
+            return 'No OCR text for this card'

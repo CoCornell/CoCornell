@@ -4,6 +4,9 @@ from flask.ext.login import login_required
 from mysite import app
 from mysite.models.list import List
 from mysite.models.card import Card
+from mysite.models.ocr import OCR
+from mysite.api.utils import ok, error
+from mysite.api.const import Error
 
 
 @app.route("/card/", methods=['POST'])
@@ -39,3 +42,20 @@ def delete_card(card_id):
         return redirect(url_for('board'))
     Card.delete_card_by_id(card_id)
     return jsonify({"deleted": True})
+
+
+@app.route("/card/<int:card_id>/ocr-text/", methods=['GET'])
+@login_required
+def card_ocr_text(card_id):
+    """
+    Returns the OCR text of a card if it is an image card.
+    """
+    ocr = OCR.get_ocr_by_card_id(card_id)
+    if not ocr:
+        return error(Error.NO_OCR_TEXT)
+    return ok({
+        "ocr": {
+            "card_id": ocr.card_id,
+            "text": ocr.text
+        }
+    })

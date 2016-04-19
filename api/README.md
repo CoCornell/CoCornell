@@ -98,6 +98,43 @@ curl http://localhost:5000/api/board/
 
 
 
+# GET /board/\<int:board_id\>
+Returns lists in the board specified by board_id.
+
+### Requires Authentication
+Yes
+
+### Parameters
+None
+
+### Sample Request
+```
+curl http://localhost:5000/api/board/1/
+```
+
+### Sample Result
+```json
+{
+  "lists": [
+    {
+      "board_id": 1,
+      "id": 2,
+      "name": "4450"
+    },
+    {
+      "board_id": 1,
+      "id": 6,
+      "name": "new_list"
+    }
+  ],
+  "status": "OK"
+}
+```
+
+
+
+
+
 # GET /board/count/
 Returns number of boards the user has access to.
 
@@ -246,6 +283,46 @@ curl -X DELETE http://localhost:5000/api/card/1/
 ```
 
 
+
+
+# CARD /card/\<int:card_id\>/ocr-text
+Get the OCR text of a card if it is an image card.
+
+### Requires Authentication
+Yes
+
+### Parameters
+None
+
+### Sample Request
+```
+curl http://localhost:5000/api/card/1/ocr-text
+```
+
+### Sample Result
+```json
+{
+  "ocr": {
+    "card_id": 1,
+    "text": "ocr text"
+  },
+  "status": "OK"
+}
+```
+
+### Sample Request
+```
+curl http://localhost:5000/api/card/2/ocr-text
+```
+
+### Sample Result
+```
+{
+  "code": 29,
+  "message": "No OCR text for this card",
+  "status": "error"
+}
+```
 
 
 
