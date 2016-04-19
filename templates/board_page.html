@@ -16,7 +16,7 @@
         <div class="main">
             {% for card in list.get_cards_by_list_id(list.id) %}
                 {% if card.is_image %}
-                    <img class="image" src="{{ url_for('static', filename='uploads/') }}{{ card.content }}" alt="{{ card.content }}">
+                    <img class="image" id="image{{ card.id }}" src="{{ url_for('static', filename='uploads/') }}{{ card.content }}" alt="{{ card.content }}">
                     <br>
                 {% else %}
                     <div class="card" id="card{{ card.id }}">

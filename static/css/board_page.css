@@ -32,7 +32,8 @@ div.main_board {
       div.main_board div.list div.main img.image {
         width: 90%;
         margin-left: 5%;
-        margin-bottom: 8px; }
+        margin-bottom: 8px;
+        cursor: pointer; }
       div.main_board div.list div.main div.card {
         border-radius: 3px;
         background: #FFFFFF;

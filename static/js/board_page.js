@@ -36,4 +36,20 @@ $(document).ready(function(){
         });
 
     //$("div.list:last-of-type").height($("div.list:first-child").height());
+
+    /**
+     * Click on image card.
+     */
+    $("img.image").click(function() {
+        var card_id = $(this).attr('id').replace('image', '');
+        $.ajax({
+            url: "/card/" + card_id + "/ocr-text/",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                alert(data.ocr.text);
+            },
+            fail: function () {}
+        });
+    });
 });
