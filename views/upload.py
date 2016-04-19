@@ -1,7 +1,7 @@
 from threading import Thread
 import os
 
-from flask import request, redirect
+from flask import request, redirect, flash
 from flask.ext.login import login_required
 from werkzeug import secure_filename
 
@@ -39,4 +39,7 @@ def upload_image():
         thread = Thread(target=async_ocr, args=[app, image_path, card.id])
         thread.start()
 
+        return redirect('/board/' + str(List.query.filter_by(id=list_id).first().board_id))
+    else:
+        flash('Invalid upload image.')
         return redirect('/board/' + str(List.query.filter_by(id=list_id).first().board_id))

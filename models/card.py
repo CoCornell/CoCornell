@@ -1,5 +1,6 @@
 from mysite import db
 from mysite.models import SerializableModel
+from mysite.models.ocr import OCR
 
 
 class Card(db.Model, SerializableModel):
@@ -37,5 +38,9 @@ class Card(db.Model, SerializableModel):
 
     @classmethod
     def delete_card_by_id(cls, card_id):
-        db.session.query(Card).filter(Card.id == card_id).delete()
+        cards = db.session.query(Card).filter(Card.id == card_id)
+        for card in cards:
+            if card.is_image:
+                OCR.delete_ocr_by_card_id(card.id)
+        cards.delete()
         db.session.commit()

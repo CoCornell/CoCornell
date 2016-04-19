@@ -30,3 +30,8 @@ class OCR(db.Model, SerializableModel):
     @classmethod
     def get_ocr_by_card_id(cls, card_id):
         return OCR.query.filter_by(card_id=card_id).first()
+
+    @classmethod
+    def delete_ocr_by_card_id(cls, card_id):
+        db.session.query(OCR).filter(OCR.card_id == card_id).delete()
+        db.session.commit()

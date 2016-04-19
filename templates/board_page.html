@@ -11,16 +11,45 @@
     {% for list in lists %}
     <div class="list" id="list{{ list.id }}">
         <div class="head">
-            <h4>{{ list.name }}<span class="delete" id="delete_list{{ list.id }}">X</span></h4>
+            <h4>{{ list.name }}<span class="delete" id="delete_list{{ list.id }}">&times;</span></h4>
         </div>
         <div class="main">
             {% for card in list.get_cards_by_list_id(list.id) %}
                 {% if card.is_image %}
-                    <img class="image" id="image{{ card.id }}" src="{{ url_for('static', filename='uploads/') }}{{ card.content }}" alt="{{ card.content }}">
+                    <img class="image" id="image{{ card.id }}"
+                         src="{{ url_for('static', filename='uploads/') }}{{ card.content }}"
+                         alt="{{ card.content }}"
+                         data-toggle="modal"
+                         data-target="#modal{{ card.id }}"
+                         data-image-name="{{ card.content }}"
+                    >
                     <br>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modal{{ card.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">{{ card.content }}</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary btn-show" id="show{{ card.id }}" data-image-name="{{ card.content }}">
+                                        Show OCR Text
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-delete-image" data-dismiss="modal" id="delete{{ card.id }}">
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {% else %}
                     <div class="card" id="card{{ card.id }}">
-                        <p><span class="delete" id="delete_card{{ card.id }}">X</span></p>
+                        <p><span class="delete" id="delete_card{{ card.id }}">&times;</span></p>
                         <p class="content">{{ card.content }}</p>
                     </div>
                 {% endif %}
@@ -30,24 +59,34 @@
         <div class="add">
             <form action="/card/" method="post" class="add_card">
                 <input class="add_card" type="text" name="list_id" value="{{ list.id }}" hidden="hidden">
-                <input class="content" type="text" name="content" id="content" placeholder="Append a card...">
+                <input class="content" type="text" name="content" id="content" placeholder="Append a text card">
                 <input class="add" type="submit" value="Add card">
             </form>
-            <form action="/upload/" method="post" enctype="multipart/form-data">
+            <form action="/upload/" method="post" enctype="multipart/form-data" class="upload">
                 <input class="add_card" type="text" name="list_id" value="{{ list.id }}" hidden="hidden">
-                <input type="file" name="file">
-                <input type="submit" value="Upload">
+                <div class="file-upload btn btn-primary btn-sm">
+                    <span>Choose Image</span>
+                    <input type="file" name="file" class="upload">
+                </div>
+                <input type="submit" value="Upload" class="btn btn-default btn-sm">
             </form>
         </div>
     </div>
     {% endfor %}
 
-    <div class="list">
+    <div class="clearfix"></div>
+
+    <form action="/list/" method="post" class="add_list">
+        <input type="text" name="name" required>
+        <input type="submit" value="Add list" class="btn btn-primary btn-sm">
+    </form>
+
+    {#<div class="list">
         <form action="/list/" method="post" class="add_list">
             <input type="text" name="name" required>
             <input type="submit" value="Add list">
         </form>
-    </div>
+    </div>#}
 
 </div><!--div.main_board-->
 {% endblock %}
