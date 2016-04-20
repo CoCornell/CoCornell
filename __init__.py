@@ -2,12 +2,14 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 
+import os
+
 
 app = Flask(__name__, static_url_path='/static')
 
 
-UPLOAD_FOLDER = 'static/uploads/'
-IMAGE_PATH = '/Users/yhf/Dropbox/code/CoCornell/mysite/static/uploads/'
+IMAGE_PATH = os.path.dirname(os.path.abspath(__file__)) + "/static/uploads/"
+UPLOAD_FOLDER = IMAGE_PATH
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
