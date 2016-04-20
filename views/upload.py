@@ -33,7 +33,7 @@ def upload_image():
     if f and allowed_file(f.filename):
         filename = secure_filename(f.filename)
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        card = Card.add_card(list_id, f.filename, True)
+        card = Card.add_card(list_id, filename, True)
 
         image_path = app.config['IMAGE_PATH'] + filename
         thread = Thread(target=async_ocr, args=[app, image_path, card.id])

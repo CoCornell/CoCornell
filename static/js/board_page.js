@@ -35,8 +35,6 @@ $(document).ready(function(){
             });
         });
 
-    //$("div.list:last-of-type").height($("div.list:first-child").height());
-
     /**
      * Delete image card button.
      */
