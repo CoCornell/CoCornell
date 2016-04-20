@@ -49,6 +49,7 @@ $(document).ready(function(){
             success: function(data) {
                 if (data.deleted) {
                     $("div.modal-backdrop").remove()
+                    $("div.modal#modal" + card_id).prev().remove();
                     $("div.modal#modal" + card_id).remove();
                     $("img.image#image" + card_id).remove();
                 }
