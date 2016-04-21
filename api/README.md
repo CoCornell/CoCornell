@@ -285,7 +285,7 @@ curl -X DELETE http://localhost:5000/api/card/1/
 
 
 
-# CARD /card/\<int:card_id\>/ocr-text
+# GET /card/\<int:card_id\>/ocr-text
 Get the OCR text of a card if it is an image card.
 
 ### Requires Authentication
