@@ -134,6 +134,38 @@ curl http://localhost:5000/api/board/1/
 
 
 
+# POST /board/
+Add a board.
+
+### Requires Authentication
+Yes
+
+### Parameters
+Parameter | Required / Optional    | Value
+----------|------------------------|---------
+`name`    |  Required              | string
+
+### Sample Request
+```
+curl -X POST -d "name=5120" http://localhost:5000/api/board/
+```
+
+### Sample Result
+```json
+{
+  "board": {
+    "id": 3,
+    "name": "5120"
+  },
+  "created": true,
+  "status": "OK"
+}
+```
+
+
+
+
+
 
 # GET /board/count/
 Returns number of boards the user has access to.
