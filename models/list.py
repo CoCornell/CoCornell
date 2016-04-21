@@ -1,5 +1,6 @@
 from mysite import db
 from mysite.models import SerializableModel
+from mysite.models.access import Access
 from mysite.models.board import Board
 from mysite.models.card import Card
 
@@ -73,4 +74,5 @@ class List(db.Model, SerializableModel):
         db.session.query(Board).filter(Board.id == board_id).delete()
         for list_ in List.query.filter_by(board_id=board_id):
             cls.delete_list_by_id(list_.id)
+        db.session.query(Access).filter(Access.board_id == board_id).delete()
         db.session.commit()
