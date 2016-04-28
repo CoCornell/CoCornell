@@ -49,11 +49,9 @@ div.main_board {
         border-radius: 3px;
         background: #FFFFFF;
         width: 90%;
-        height: 45px;
         margin: auto auto 8px; }
         div.main_board div.list div.main div.card p.content {
-          overflow-y: scroll;
-          overflow-x: auto;
+          white-space: normal;
           margin-left: 10px;
           padding-top: 3px;
           width: 80%; }
