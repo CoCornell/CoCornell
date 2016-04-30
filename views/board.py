@@ -1,4 +1,4 @@
-from flask import request, render_template, g, flash, redirect, url_for
+from flask import request, render_template, g, flash, redirect, url_for, jsonify
 from flask.ext.login import login_required
 
 from mysite import app
@@ -33,3 +33,19 @@ def board_page(board_id):
         return render_template("no_access.html")
     lists = List.get_lists_by_board_id(board_id)
     return render_template("board_page.html", lists=lists)
+
+
+@app.route("/board2/<int:board_id>/", methods=['GET'])   # for test react
+@login_required
+def board_page2(board_id):
+    if not Board.has_access_to(g.user.netid, board_id):
+        return render_template("no_access.html")
+    lists = List.get_lists_by_board_id(board_id)
+    return render_template("board_page2.html", lists=lists)
+
+
+@app.route("/board3/<int:board_id>/", methods=['GET'])  # for api
+@login_required
+def board_page3(board_id):
+    lists = List.get_lists_by_board_id(board_id)
+    return jsonify({"lists": map(lambda x: x.to_dict(), lists)})
