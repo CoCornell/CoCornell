@@ -10,93 +10,112 @@ div.main_board {
     background-color: inherit;
     padding-top: 0;
     margin-top: 0;
-
-
-  }*/ }
-  div.main_board div.list {
-    display: inline-block;
-    width: 250px;
-    height: 92%;
-    min-height: 400px;
-    background-color: #e2e4e6;
-    margin-left: 1em;
-    border-radius: 3px; }
-    div.main_board div.list div.head {
-      height: 40px;
-      padding-left: 10px; }
-      div.main_board div.list div.head h4 span.delete {
-        float: right;
-        margin-right: 10px;
-        cursor: pointer; }
-      div.main_board div.list div.head h4 span.delete:hover {
-        color: #0067a3;
-        font-weight: 800; }
-    div.main_board div.list div.main {
-      overflow: scroll;
-      overflow: -moz-scrollbars-vertical;
-      height: 78%;
-      padding-bottom: 8px; }
-      div.main_board div.list div.main img.image {
-        width: 90%;
-        margin-left: 5%;
-        margin-bottom: 8px;
-        cursor: pointer; }
-      div.main_board div.list div.main div.modal div.modal-body {
-        white-space: normal; }
-        div.main_board div.list div.main div.modal div.modal-body img.modal-image {
-          width: 100%; }
-      div.main_board div.list div.main div.card {
-        border-radius: 3px;
-        background: #FFFFFF;
-        width: 90%;
-        margin: auto auto 8px; }
-        div.main_board div.list div.main div.card p.content {
-          white-space: normal;
-          margin-left: 10px;
-          padding-top: 3px;
-          width: 80%; }
-        div.main_board div.list div.main div.card p span.delete {
-          width: 10%;
-          display: inline-block;
-          float: right;
-          text-align: center;
-          cursor: pointer; }
-        div.main_board div.list div.main div.card p span.delete:hover {
-          color: #0067a3; }
-    div.main_board div.list div.add {
-      height: 20%; }
-      div.main_board div.list div.add form.add_card {
-        width: 90%;
-        margin: auto; }
-        div.main_board div.list div.add form.add_card input.add_card {
-          display: none; }
-        div.main_board div.list div.add form.add_card input.content {
-          width: 100%; }
-        div.main_board div.list div.add form.add_card input.add {
-          display: none; }
-      div.main_board div.list div.add form.upload {
-        margin-top: 3px;
-        margin-left: 5%; }
-        div.main_board div.list div.add form.upload div.file-upload {
-          position: relative;
-          overflow: hidden; }
-          div.main_board div.list div.add form.upload div.file-upload input.upload {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            filter: alpha(opacity=0); }
-  div.main_board form.add_list {
-    margin-left: 1em;
-    margin-top: 10px;
-    padding-top: 0; }
-  div.main_board .clearfix:after {
-    content: "";
-    display: table;
-    clear: both; }
-
-/*# sourceMappingURL=board_page.css.map */
+  }*/
+}
+div.main_board div.list {
+  display: inline-block;
+  width: 250px;
+  height: 92%;
+  min-height: 400px;
+  background-color: #e2e4e6;
+  margin-left: 1em;
+  border-radius: 3px;
+}
+div.main_board div.list div.head {
+  height: 40px;
+  padding-left: 10px;
+}
+div.main_board div.list div.head h4 span.delete {
+  float: right;
+  margin-right: 10px;
+  cursor: pointer;
+}
+div.main_board div.list div.head h4 span.delete:hover {
+  color: #0067a3;
+  font-weight: 800;
+}
+div.main_board div.list div.main {
+  overflow: scroll;
+  overflow: -moz-scrollbars-vertical;
+  height: 78%;
+  padding-bottom: 8px;
+}
+div.main_board div.list div.main img.image {
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+div.main_board div.list div.main div.modal div.modal-body {
+  white-space: normal;
+}
+div.main_board div.list div.main div.modal div.modal-body img.modal-image {
+  width: 100%;
+}
+div.main_board div.list div.main div.card {
+  border-radius: 3px;
+  background: #FFFFFF;
+  width: 90%;
+  margin: auto auto 8px;
+}
+div.main_board div.list div.main div.card p.content {
+  white-space: normal;
+  margin-left: 10px;
+  padding-top: 3px;
+  width: 80%;
+}
+div.main_board div.list div.main div.card p span.delete {
+  width: 10%;
+  display: inline-block;
+  float: right;
+  text-align: center;
+  cursor: pointer;
+}
+div.main_board div.list div.main div.card p span.delete:hover {
+  color: #0067a3;
+}
+div.main_board div.list div.add {
+  height: 20%;
+}
+div.main_board div.list div.add form.add_card {
+  width: 90%;
+  margin: auto;
+}
+div.main_board div.list div.add form.add_card input.add_card {
+  display: none;
+}
+div.main_board div.list div.add form.add_card input.content {
+  width: 100%;
+}
+div.main_board div.list div.add form.add_card input.add {
+  display: none;
+}
+div.main_board div.list div.add form.upload {
+  margin-top: 3px;
+  margin-left: 5%;
+}
+div.main_board div.list div.add form.upload div.file-upload {
+  position: relative;
+  overflow: hidden;
+}
+div.main_board div.list div.add form.upload div.file-upload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+div.main_board form.add_list {
+  margin-left: 1em;
+  margin-top: 10px;
+  padding-top: 0;
+}
+div.main_board .clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
