@@ -4,6 +4,8 @@ from flask.ext.login import login_required
 from mysite import app
 from mysite.models.board import Board
 from mysite.models.list import List
+from mysite.api.utils import error, ok
+from mysite.api.const import Error
 
 
 @app.route('/board/', methods=['GET', 'POST'])
@@ -44,8 +46,21 @@ def board_page2(board_id):
     return render_template("board_page2.html", lists=lists)
 
 
-@app.route("/board3/<int:board_id>/", methods=['GET'])  # for api
+@app.route("/board3/<int:board_id>/", methods=['GET', 'POST'])  # for api
 @login_required
 def board_page3(board_id):
-    lists = List.get_lists_by_board_id(board_id)
-    return jsonify({"lists": map(lambda x: x.to_dict(), lists)})
+    """
+    """
+    if request.method == 'GET':
+        lists = List.get_lists_by_board_id(board_id)
+        return ok({"lists": map(lambda x: x.to_dict(), lists)})
+    elif request.method == 'POST':
+        name = request.form.get("name")
+        if not name:
+            return error(Error.EMPTY_LIST_NAME, 400)
+
+        if not Board.has_access_to(g.user.netid, board_id):
+            return error(Error.NO_ACCESS_TO_BOARD, 400)
+
+        list_ = List.add_list(board_id, name)
+        return ok({"created": True, "list": list_.to_dict()})

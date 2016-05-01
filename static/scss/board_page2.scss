@@ -130,16 +130,20 @@ div.main_board {
       }
     }
 
-    form.add_list {
-      margin-left: 1em;
-      margin-top: 10px;
-      padding-top: 0;
-    }
-
     .clearfix:after {
       content: "";
       display: table;
       clear: both;
+    }
+  }
+
+  form.addListForm {
+    margin-left: 1em;
+    margin-top: 10px;
+    padding-top: 0;
+
+    input[type=submit] {
+      margin-left: 5px;
     }
   }
 }

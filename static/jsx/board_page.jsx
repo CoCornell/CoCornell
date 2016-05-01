@@ -7,7 +7,14 @@ AllLists
       - Image
         - ModalImage
         - ModalText
+    - AddCardForm
+  - AddListForm
 */
+
+
+var tokens = window.location.href.split("/");
+var board_id = tokens[tokens.length-2];
+
 
 var AllLists = React.createClass({
   getInitialState: function() {
@@ -25,20 +32,37 @@ var AllLists = React.createClass({
       }.bind(this)
     });
   },
+  handleAddListSubmit: function(payload) {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: payload,
+      success: function(data) {
+        var lists = this.state.lists;
+        var new_lists = lists.concat([data.list]);
+        this.setState({lists: new_lists});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   componentDidMount: function() {
     this.loadListsFromServer();
     setInterval(this.loadListsFromServer, this.props.pollInterval);
   },
   render: function() {    
-    var rl = this.removeList;
     var lists = this.state.lists.map(function(list) {
       return (
-        <List key={list.id} list={list} removeList={rl} />
+        <List key={list.id} list={list} />
       )
     });
     return (
       <div className="allLists">
         {lists}
+        <div class="clearfix"></div>
+        <AddListForm onAddListSubmit={this.handleAddListSubmit} />
       </div>
     )
   }
@@ -147,7 +171,20 @@ var Image = React.createClass({
   getInitialState: function() {
     return {showingImage: true};
   },
+  toggle: function() {
+    this.setState({showingImage: !this.state.showingImage});
+  },
   render: function() {
+    var modalBody;
+    var buttonText;
+    if (this.state.showingImage) {
+      modalBody = <ModalImage card={this.props.card} />;
+      buttonText = "Show OCR Text";
+    } else {
+      modalBody = <ModalText card={this.props.card} />;
+      buttonText = "Show Image";
+    }
+
     return (
       <div className="image">
         <img className="image" id={"image" + this.props.card.id} 
@@ -165,11 +202,15 @@ var Image = React.createClass({
                         <h4 className="modal-title" id="myModalLabel">{ this.props.card.content }</h4>
                     </div>
                     <div className="modal-body">
-                      <ModalImage card={this.props.card} />
+                      {modalBody}
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-primary btn-show" id={"show" + this.props.card.id } data-image-name={this.props.card.content}>
-                            Show OCR Text
+                        <button type="button" 
+                                className="btn btn-primary btn-show" 
+                                id={"show" + this.props.card.id } 
+                                data-image-name={this.props.card.content}
+                                onClick={this.toggle} >
+                            {buttonText}
                         </button>
                         <button type="button" className="btn btn-default btn-delete-image" data-dismiss="modal" id={"delete" + this.props.card.id }>
                             Delete
@@ -204,8 +245,7 @@ var ModalText = React.createClass({
       dataType: "json",
       success: function(data) {
           this.setState({text: data.ocr.text});
-          this_button.text("Show Image");
-      },
+      }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
       }.bind(this)
@@ -222,7 +262,37 @@ var ModalText = React.createClass({
 });
 
 
+var AddListForm = React.createClass({
+  getInitialState: function() {
+    return {name: ''};
+  },
+  handleNameChange: function(e) {
+    this.setState({
+      name: e.target.value,
+      board_id: e.target
+    });
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var name = this.state.name.trim();
+    if (!name) {
+      return;
+    }
+    this.props.onAddListSubmit({name: name});
+    this.setState({name: ''});
+  },
+  render: function() {
+    return (
+      <form className="addListForm" onSubmit={this.handleSubmit}>
+        <input type="text" name="name" onChange={this.handleNameChange} required />
+        <input type="submit" value="Add list" className="btn btn-primary btn-sm" />
+      </form>
+    )
+  }
+});
+
+
 ReactDOM.render(
-  <AllLists url="/board3/8/" pollInterval={1000} />,
+  <AllLists url={"/board3/" + board_id + "/"} pollInterval={1000} />,
   document.getElementById('main_board')
 );

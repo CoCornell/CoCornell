@@ -107,13 +107,16 @@ div.main_board div.allLists div.list div.add form.upload div.file-upload input.u
   opacity: 0;
   filter: alpha(opacity=0);
 }
-div.main_board div.allLists form.add_list {
-  margin-left: 1em;
-  margin-top: 10px;
-  padding-top: 0;
-}
 div.main_board div.allLists .clearfix:after {
   content: "";
   display: table;
   clear: both;
+}
+div.main_board form.addListForm {
+  margin-left: 1em;
+  margin-top: 10px;
+  padding-top: 0;
+}
+div.main_board form.addListForm input[type=submit] {
+  margin-left: 5px;
 }
