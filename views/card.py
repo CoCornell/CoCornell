@@ -59,3 +59,18 @@ def card_ocr_text(card_id):
             "text": ocr.text
         }
     })
+
+
+@app.route("/list/<int:list_id>/", methods=['GET'])
+@login_required
+def list_(list_id):
+    """
+    Returns all cards in the list specified by list id.
+    """
+    if not List.has_access_to(g.user.netid, list_id):
+        return error(Error.NO_ACCESS_TO_LIST)
+
+    l = List.get_list_by_id(list_id).to_dict()
+    cards = List.get_cards_by_list_id(list_id)
+    l['cards'] = map(lambda x: x.to_dict(), cards)
+    return ok({"list": l})

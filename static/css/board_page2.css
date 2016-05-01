@@ -7,6 +7,9 @@ div.main_board {
   height: 86vh;
   margin: auto;
 }
+div.main_board div.allLists {
+  height: 100%;
+}
 div.main_board div.allLists div.list {
   display: inline-block;
   width: 250px;
