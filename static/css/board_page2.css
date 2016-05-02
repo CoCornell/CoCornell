@@ -35,7 +35,7 @@ div.main_board div.allLists div.list div.listName h4 span.delete:hover {
 div.main_board div.allLists div.list div.allCards {
   overflow: scroll;
   overflow: -moz-scrollbars-vertical;
-  height: 78%;
+  height: 98%;
   padding-bottom: 8px;
 }
 div.main_board div.allLists div.list div.allCards img.image {
@@ -72,31 +72,31 @@ div.main_board div.allLists div.list div.allCards div.card p span.delete {
 div.main_board div.allLists div.list div.allCards div.card p span.delete:hover {
   color: #0067a3;
 }
-div.main_board div.allLists div.list div.add {
+div.main_board div.allLists div.list div.allCards div.add {
   height: 20%;
 }
-div.main_board div.allLists div.list div.add form.add_card {
+div.main_board div.allLists div.list div.allCards div.add form.addCardForm {
   width: 90%;
   margin: auto;
 }
-div.main_board div.allLists div.list div.add form.add_card input.add_card {
+div.main_board div.allLists div.list div.allCards div.add form.addCardForm input.add_card {
   display: none;
 }
-div.main_board div.allLists div.list div.add form.add_card input.content {
+div.main_board div.allLists div.list div.allCards div.add form.addCardForm input.content {
   width: 100%;
 }
-div.main_board div.allLists div.list div.add form.add_card input.add {
+div.main_board div.allLists div.list div.allCards div.add form.addCardForm input.add {
   display: none;
 }
-div.main_board div.allLists div.list div.add form.upload {
+div.main_board div.allLists div.list div.allCards div.add form.upload {
   margin-top: 3px;
   margin-left: 5%;
 }
-div.main_board div.allLists div.list div.add form.upload div.file-upload {
+div.main_board div.allLists div.list div.allCards div.add form.upload div.file-upload {
   position: relative;
   overflow: hidden;
 }
-div.main_board div.allLists div.list div.add form.upload div.file-upload input.upload {
+div.main_board div.allLists div.list div.allCards div.add form.upload div.file-upload input.upload {
   position: absolute;
   top: 0;
   right: 0;

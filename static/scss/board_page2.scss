@@ -39,7 +39,7 @@ div.main_board {
       div.allCards {
         overflow: scroll;
         overflow: -moz-scrollbars-vertical;
-        height: 78%;
+        height: 98%;
         padding-bottom: 8px;
 
         img.image {
@@ -86,44 +86,44 @@ div.main_board {
             }
           }
         }
-      }
 
-      div.add {
-        height: 20%;
+        div.add {
+          height: 20%;
 
-        form.add_card {
-          width: 90%;
-          margin: auto;
+          form.addCardForm {
+            width: 90%;
+            margin: auto;
 
-          input.add_card {
-            display: none;
+            input.add_card {
+              display: none;
+            }
+            input.content {
+              width: 100%;
+            }
+            input.add {
+              display: none;
+            }
           }
-          input.content {
-            width: 100%;
-          }
-          input.add {
-            display: none;
-          }
-        }
 
-        form.upload {
-          margin-top: 3px;
-          margin-left: 5%;
+          form.upload {
+            margin-top: 3px;
+            margin-left: 5%;
 
-          div.file-upload {
-            position: relative;
-            overflow: hidden;
+            div.file-upload {
+              position: relative;
+              overflow: hidden;
 
-            input.upload {
-              position: absolute;
-              top: 0;
-              right: 0;
-              margin: 0;
-              padding: 0;
-              font-size: 20px;
-              cursor: pointer;
-              opacity: 0;
-              filter: alpha(opacity=0);
+              input.upload {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                padding: 0;
+                font-size: 20px;
+                cursor: pointer;
+                opacity: 0;
+                filter: alpha(opacity=0);
+              }
             }
           }
         }

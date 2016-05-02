@@ -8,6 +8,7 @@ AllLists
         - ModalImage
         - ModalText
     - AddCardForm
+    - AddImageForm
   - AddListForm
 */
 
@@ -93,7 +94,7 @@ var List = React.createClass({
             <span className="delete" id={'delete_list' + this.props.list.id} onClick={this.deleteThisList}>&times;</span>
           </h4>
         </div>
-        <AllCards url={"/list/" + this.props.list.id + "/"} pollInterval={1000} />
+        <AllCards url={"/list/" + this.props.list.id + "/"} pollInterval={1000} list_id={this.props.list.id} />
       </div>
     )
   }
@@ -122,6 +123,38 @@ var AllCards = React.createClass({
     this.loadCardsFromServer();
     setInterval(this.loadCardsFromServer, this.props.pollInterval);
   },
+  handleAddCardSubmit: function(payload) {
+    $.ajax({
+      url: "/card/",
+      dataType: 'json',
+      type: 'POST',
+      data: payload,
+      success: function(data) {
+        var cards = this.state.cards;
+        var new_cards = cards.concat([data.card]);
+        this.setState({cards: new_cards});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+  handleAddImageSubmit: function(payload) {
+    $.ajax({
+      url: "/upload2/",
+      dataType: 'json',
+      type: 'POST',
+      data: payload,
+      success: function(data) {
+        var cards = this.state.cards;
+        var new_cards = cards.concat([data.card]);
+        this.setState({cards: new_cards});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   render: function() {
     var cards = this.state.cards.map(function(card) {
       if (!card.is_image) {
@@ -137,6 +170,10 @@ var AllCards = React.createClass({
     return (
       <div className="allCards">
         {cards}
+        <div className="add">
+          <AddCardForm onAddCardSubmit={this.handleAddCardSubmit} list_id={this.props.list_id} />
+          <AddImageForm onAddImageSubmit={this.handleAddImageSubmit} list_id={this.props.list_id} />
+        </div>
       </div>
     )
   }
@@ -268,8 +305,7 @@ var AddListForm = React.createClass({
   },
   handleNameChange: function(e) {
     this.setState({
-      name: e.target.value,
-      board_id: e.target
+      name: e.target.value
     });
   },
   handleSubmit: function(e) {
@@ -286,6 +322,83 @@ var AddListForm = React.createClass({
       <form className="addListForm" onSubmit={this.handleSubmit}>
         <input type="text" name="name" onChange={this.handleNameChange} required />
         <input type="submit" value="Add list" className="btn btn-primary btn-sm" />
+      </form>
+    )
+  }
+});
+
+
+var AddCardForm = React.createClass({
+  getInitialState: function() {
+    return {content: ''};
+  },
+  handleContentChange: function(e) {
+    this.setState({
+      content: e.target.value
+    });
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var content = this.state.content.trim();
+    if (!content) {
+      return;
+    }
+    this.props.onAddCardSubmit({
+      content: content,
+      list_id: this.props.list_id
+    });
+    this.setState({content: ''});
+  },
+  render: function() {
+    return (
+      <form className="addCardForm" onSubmit={this.handleSubmit}>
+        <input className="content" type="text" name="content" onChange={this.handleContentChange} placeholder="Append a text card" required />
+        <input className="add" type="submit" value="Add card" />
+      </form>
+    )
+  }
+});
+
+
+var AddImageForm = React.createClass({
+  getInitialState: function() {
+    return {
+      data_uri: null,
+    };
+  },
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var data_uri = this.state.data_uri.trim();
+    if (!data_uri) {
+      return;
+    }
+    this.props.onAddImageSubmit({
+      file: data_uri.substring(21),
+      list_id: this.props.list_id
+    });
+    this.setState({data_uri: ''});
+  },
+  handleFileChange: function(e) {
+    var self = this;
+    var reader = new FileReader();
+    var file = e.target.files[0];
+
+    reader.onload = function(upload) {
+      self.setState({
+        data_uri: upload.target.result,
+      });
+    }
+
+    reader.readAsDataURL(file);
+  },
+  render: function() {
+    return (
+      <form ref="uploadForm" className="upload" action="/upload/" method="post" encType="multipart/form-data" onSubmit={this.handleSubmit}>
+        <div className="file-upload btn btn-primary btn-sm">
+            <span>Choose Image</span>
+            <input ref="file" type="file" name="file" className="upload" onChange={this.handleFileChange} />
+        </div>
+        <input type="submit" value="Upload" className="btn btn-default btn-sm" />
       </form>
     )
   }

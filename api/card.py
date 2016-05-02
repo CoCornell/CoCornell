@@ -42,7 +42,7 @@ def add_card():
         return error(Error.NO_ACCESS_TO_BOARD, 400)
 
     card = Card.add_card(list_id, content)
-    return ok({"created": True, "list": card.to_dict()})
+    return ok({"created": True, "card": card.to_dict()})
 
 
 @api.route("/card/<int:card_id>/ocr-text/", methods=['GET'])

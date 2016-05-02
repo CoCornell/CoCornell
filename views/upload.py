@@ -1,7 +1,9 @@
+import uuid
+import base64
 from threading import Thread
 import os
 
-from flask import request, redirect, flash
+from flask import request, redirect, flash, g
 from flask.ext.login import login_required
 from werkzeug import secure_filename
 
@@ -10,6 +12,8 @@ from mysite.models.list import List
 from mysite.models.card import Card
 from mysite.models.ocr import OCR
 from mysite.ocr.ocr import ocr
+from mysite.api.const import Error
+from mysite.api.utils import ok, error
 
 
 def allowed_file(filename):
@@ -43,3 +47,34 @@ def upload_image():
     else:
         flash('Invalid upload image.')
         return redirect('/board/' + str(List.query.filter_by(id=list_id).first().board_id))
+
+
+@app.route("/upload2/", methods=['POST'])   # for api
+@login_required
+def upload_image2():
+    """
+    Upload an image to a list.
+    """
+    list_id = request.form.get("list_id")
+    base64_str = request.form.get("file")
+
+    if not list_id:
+        return error(Error.EMPTY_LIST_ID, 400)
+    if not base64_str:
+        return error(Error.EMPTY_IMAGE, 400)
+    if not List.has_access_to(g.user.netid, list_id):
+        return error(Error.NO_ACCESS_TO_LIST, 400)
+
+    decoded = base64.decodestring(base64_str)
+    filename = str(uuid.uuid4()) + ".png"
+    image_path = app.config['IMAGE_PATH'] + filename
+    with open(image_path, "wb") as f:
+        f.write(decoded)
+
+    card = Card.add_card(list_id, filename, True)
+
+    image_path = app.config['IMAGE_PATH'] + filename
+    thread = Thread(target=async_ocr, args=[app, image_path, card.id])
+    thread.start()
+
+    return ok({"created": True, "card": card.to_dict()})

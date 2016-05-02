@@ -4,6 +4,8 @@ from flask.ext.login import login_required
 from mysite import app
 from mysite.models.list import List
 from mysite.models.board import Board
+from mysite.api.const import Error
+from mysite.api.utils import ok, error
 
 
 @app.route("/list/", methods=['POST'])

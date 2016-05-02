@@ -22,9 +22,9 @@ class Error(object):
     EMPTY_CARD_CONTENT = 27
     EMPTY_IMAGE = 28
     NO_OCR_TEXT = 29
+    INVALID_UPLOAD_IMAGE = 30
 
-    MISSING_PARAMETER = 30
-
+    MISSING_PARAMETER = 31
 
     @classmethod
     def error_message(cls, error_code, *args):
@@ -56,3 +56,5 @@ class Error(object):
             return 'List id is empty'
         elif error_code == cls.NO_OCR_TEXT:
             return 'No OCR text for this card'
+        elif error_code == cls.INVALID_UPLOAD_IMAGE:
+            return 'The upload image is not valid'
