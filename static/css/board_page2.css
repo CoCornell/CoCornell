@@ -35,7 +35,7 @@ div.main_board div.allLists div.list div.listName h4 span.delete:hover {
 div.main_board div.allLists div.list div.allCards {
   overflow: scroll;
   overflow: -moz-scrollbars-vertical;
-  height: 98%;
+  height: 90%;
   padding-bottom: 8px;
 }
 div.main_board div.allLists div.list div.allCards img.image {

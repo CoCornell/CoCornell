@@ -211,6 +211,17 @@ var Image = React.createClass({
   toggle: function() {
     this.setState({showingImage: !this.state.showingImage});
   },
+  deleteThisImage: function() {
+    $.ajax({
+      url: "/card/" + this.props.card.id + "/",
+      type: "DELETE",
+      dataType: "json",
+      success: function(data) {},
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   render: function() {
     var modalBody;
     var buttonText;
@@ -249,7 +260,7 @@ var Image = React.createClass({
                                 onClick={this.toggle} >
                             {buttonText}
                         </button>
-                        <button type="button" className="btn btn-default btn-delete-image" data-dismiss="modal" id={"delete" + this.props.card.id }>
+                        <button type="button" className="btn btn-default btn-delete-image" data-dismiss="modal" onClick={this.deleteThisImage}>
                             Delete
                         </button>
                     </div>
@@ -316,11 +327,12 @@ var AddListForm = React.createClass({
     }
     this.props.onAddListSubmit({name: name});
     this.setState({name: ''});
+    ReactDOM.findDOMNode(this.refs.name).value = "";
   },
   render: function() {
     return (
       <form className="addListForm" onSubmit={this.handleSubmit}>
-        <input type="text" name="name" onChange={this.handleNameChange} required />
+        <input ref="name" type="text" name="name" onChange={this.handleNameChange} required />
         <input type="submit" value="Add list" className="btn btn-primary btn-sm" />
       </form>
     )
@@ -348,11 +360,12 @@ var AddCardForm = React.createClass({
       list_id: this.props.list_id
     });
     this.setState({content: ''});
+    ReactDOM.findDOMNode(this.refs.content).value = "";
   },
   render: function() {
     return (
       <form className="addCardForm" onSubmit={this.handleSubmit}>
-        <input className="content" type="text" name="content" onChange={this.handleContentChange} placeholder="Append a text card" required />
+        <input ref="content" className="content" type="text" name="content" onChange={this.handleContentChange} placeholder="Append a text card" required />
         <input className="add" type="submit" value="Add card" />
       </form>
     )
