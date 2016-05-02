@@ -20,28 +20,11 @@ def add_card():
 
     if not content:
         return error(Error.EMPTY_CONTENT, 400)
-
     if not List.has_access_to(g.user.netid, list_id):
         return error(Error.NO_ACCESS_TO_BOARD, 400)
 
     card = Card.add_card(list_id, content)
     return ok({"created": True, "card": card.to_dict()})
-
-    # list_id = request.form.get("list_id")
-    # if not list_id:
-    #     return redirect(url_for("board"))
-    #
-    # board_id = List.get_list_by_id(list_id).board_id
-    #
-    # if not List.has_access_to(g.user.netid, list_id):
-    #     return render_template("no_access.html")
-    #
-    # content = request.form.get("content")
-    # if not content:
-    #     flash("Card content can not be empty.")
-    # else:
-    #     Card.add_card(list_id, content)
-    # return redirect('/board/' + str(board_id))
 
 
 @app.route("/card/<int:card_id>/", methods=['DELETE'])

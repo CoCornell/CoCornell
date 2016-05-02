@@ -391,7 +391,7 @@ curl -X POST -d "list_id=6&content=content" http://localhost:5000/api/card/
 
 
 # POST /upload/
-Add an image card.
+Add an image card. The Image file should be base64 encoded.
 
 ### Requires Authentication
 Yes
@@ -400,18 +400,18 @@ Yes
 Parameter | Required / Optional    | Value
 ----------|------------------------|---------
 `list_id` |  Required              | Integer
-`file`    |  Required              | File
+`file`    |  Required              | String
 
 ### Sample Request
 ```
-curl -X POST http://localhost:5000/api/upload/ -d "list_id=6&file=@/Users/yhf/Desktop/test.png"
+curl -X POST http://localhost:5000/api/upload/ -d '{"file" : "'"$( base64 ~/Pictures/test.jpg)"'"}'
 ```
 
 ### Sample Result
 ```json
 {
   "card": {
-    "content": "test.png",
+    "content": "3a093065-70e8-4e89-9637-093a0e94796e.png",
     "id": 30,
     "is_image": true,
     "list_id": 6

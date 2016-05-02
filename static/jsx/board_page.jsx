@@ -141,7 +141,7 @@ var AllCards = React.createClass({
   },
   handleAddImageSubmit: function(payload) {
     $.ajax({
-      url: "/upload2/",
+      url: "/upload/",
       dataType: 'json',
       type: 'POST',
       data: payload,
@@ -332,7 +332,7 @@ var AddListForm = React.createClass({
   render: function() {
     return (
       <form className="addListForm" onSubmit={this.handleSubmit}>
-        <input ref="name" type="text" name="name" onChange={this.handleNameChange} required />
+        <input ref="name" type="text" name="name" onChange={this.handleNameChange} autoComplete="off" required />
         <input type="submit" value="Add list" className="btn btn-primary btn-sm" />
       </form>
     )
@@ -365,7 +365,14 @@ var AddCardForm = React.createClass({
   render: function() {
     return (
       <form className="addCardForm" onSubmit={this.handleSubmit}>
-        <input ref="content" className="content" type="text" name="content" onChange={this.handleContentChange} placeholder="Append a text card" required />
+        <input ref="content" 
+               className="content" 
+               type="text" 
+               name="content" 
+               onChange={this.handleContentChange} 
+               placeholder="Append a text card"
+               autoComplete="off"
+               required />
         <input className="add" type="submit" value="Add card" />
       </form>
     )
@@ -419,6 +426,6 @@ var AddImageForm = React.createClass({
 
 
 ReactDOM.render(
-  <AllLists url={"/board3/" + board_id + "/"} pollInterval={1000} />,
+  <AllLists url={"/board/" + board_id + "/list/"} pollInterval={1000} />,
   document.getElementById('main_board')
 );

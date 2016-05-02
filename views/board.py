@@ -28,28 +28,20 @@ def board():
 @app.route("/board/<int:board_id>/", methods=['GET'])
 @login_required
 def board_page(board_id):
-    """
-    Main page of the board.
-    """
     if not Board.has_access_to(g.user.netid, board_id):
         return render_template("no_access.html")
     lists = List.get_lists_by_board_id(board_id)
     return render_template("board_page.html", lists=lists)
 
 
-@app.route("/board2/<int:board_id>/", methods=['GET'])   # for test react
+@app.route("/board/<int:board_id>/list/", methods=['GET', 'POST'])
 @login_required
-def board_page2(board_id):
-    if not Board.has_access_to(g.user.netid, board_id):
-        return render_template("no_access.html")
-    lists = List.get_lists_by_board_id(board_id)
-    return render_template("board_page2.html", lists=lists)
-
-
-@app.route("/board3/<int:board_id>/", methods=['GET', 'POST'])  # for api
-@login_required
-def board_page3(board_id):
+def board_list(board_id):
     """
+    GET: get all lists of the specified board
+    POST: add a list to the specified board
+
+    Return JSON.
     """
     if request.method == 'GET':
         lists = List.get_lists_by_board_id(board_id)
