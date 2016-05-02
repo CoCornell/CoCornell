@@ -1,15 +1,17 @@
+import uuid
+import base64
 from threading import Thread
-import os
 
-from flask import request, redirect, flash
+from flask import request, g
 from flask.ext.login import login_required
-from werkzeug import secure_filename
 
 from mysite import app, ALLOWED_EXTENSIONS
 from mysite.models.list import List
 from mysite.models.card import Card
 from mysite.models.ocr import OCR
 from mysite.ocr.ocr import ocr
+from mysite.api.const import Error
+from mysite.api.utils import ok, error
 
 
 def allowed_file(filename):
@@ -26,20 +28,29 @@ def async_ocr(app, image_path, card_id):
 @login_required
 def upload_image():
     """
-    Upload an image to a list.
+    Upload an image to a list,
+    return JSON.
     """
     list_id = request.form.get("list_id")
-    f = request.files['file']
-    if f and allowed_file(f.filename):
-        filename = secure_filename(f.filename)
-        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        card = Card.add_card(list_id, filename, True)
+    base64_str = request.form.get("file")
 
-        image_path = app.config['IMAGE_PATH'] + filename
-        thread = Thread(target=async_ocr, args=[app, image_path, card.id])
-        thread.start()
+    if not list_id:
+        return error(Error.EMPTY_LIST_ID, 400)
+    if not base64_str:
+        return error(Error.EMPTY_IMAGE, 400)
+    if not List.has_access_to(g.user.netid, list_id):
+        return error(Error.NO_ACCESS_TO_LIST, 400)
 
-        return redirect('/board/' + str(List.query.filter_by(id=list_id).first().board_id))
-    else:
-        flash('Invalid upload image.')
-        return redirect('/board/' + str(List.query.filter_by(id=list_id).first().board_id))
+    decoded = base64.decodestring(base64_str)
+    filename = str(uuid.uuid4()) + ".png"
+    image_path = app.config['IMAGE_PATH'] + filename
+    with open(image_path, "wb") as f:
+        f.write(decoded)
+
+    card = Card.add_card(list_id, filename, True)
+
+    image_path = app.config['IMAGE_PATH'] + filename
+    thread = Thread(target=async_ocr, args=[app, image_path, card.id])
+    thread.start()
+
+    return ok({"created": True, "card": card.to_dict()})

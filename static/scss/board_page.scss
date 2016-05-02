@@ -1,0 +1,153 @@
+div.main_board {
+  overflow: -moz-scrollbars-horizontal;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 98%;
+  height: 86vh;
+  margin: auto;
+
+  div.allLists {
+    height: 100%;
+
+    div.list {
+      display: inline-block;
+      width: 250px;
+      height: 92%;
+      min-height: 400px;
+      background-color: #e2e4e6;
+      margin-left: 1em;
+      border-radius: 3px;
+
+      div.listName {
+        height: 40px;
+        padding-left: 10px;
+
+        h4 {
+          span.delete {
+            float: right;
+            margin-right: 10px;
+            cursor: pointer;
+          }
+          span.delete:hover {
+            color: #0067a3;
+            font-weight: 800;
+          }
+        }
+      }
+
+      div.allCards {
+        overflow: scroll;
+        overflow: -moz-scrollbars-vertical;
+        height: 90%;
+        padding-bottom: 8px;
+
+        img.image {
+          width: 90%;
+          margin-left: 5%;
+          margin-bottom: 8px;
+          cursor: pointer;
+        }
+
+        div.modal {
+          div.modal-body {
+            white-space: normal;
+
+            img.modal-image {
+              width: 100%;
+            }
+          }
+        }
+
+        div.card {
+          border-radius: 3px;
+          background: #FFFFFF;
+          width: 90%;
+          margin: auto auto 8px;
+
+          p.content {
+            white-space: normal;
+            margin-left: 10px;
+            padding-top: 3px;
+            width: 80%;
+          }
+
+          p {
+            span.delete {
+              width: 10%;
+              display: inline-block;
+              float: right;
+              text-align: center;
+              cursor: pointer;
+            }
+
+            span.delete:hover {
+              color: #0067a3;
+            }
+          }
+        }
+
+        div.add {
+          height: 20%;
+
+          form.addCardForm {
+            width: 90%;
+            margin: auto;
+
+            input.add_card {
+              display: none;
+            }
+            input.content {
+              width: 100%;
+            }
+            input.add {
+              display: none;
+            }
+          }
+
+          form.upload {
+            margin-top: 3px;
+            margin-left: 5%;
+
+            div.file-upload {
+              position: relative;
+              overflow: hidden;
+
+              input.upload {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                padding: 0;
+                font-size: 20px;
+                cursor: pointer;
+                opacity: 0;
+                filter: alpha(opacity=0);
+              }
+            }
+
+            input[type=submit] {
+              margin-left: 5px;
+            }
+          }
+        }
+      }
+    }
+
+    .clearfix:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+
+  form.addListForm {
+    margin-left: 1em;
+    margin-top: 10px;
+    padding-top: 0;
+
+    input[type=submit] {
+      margin-left: 5px;
+    }
+  }
+}
